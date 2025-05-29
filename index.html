@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Boriken Tech | IT Solutions in Puerto Rico</title>
+  <link rel="icon" href="favicon.ico" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f8f9fb;
+      color: #333;
+    }
+
+    header {
+      background-color: #3b1e63;
+      padding: 2rem 1rem;
+      text-align: center;
+      color: white;
+    }
+
+    header h1 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    header p {
+      font-size: 1.2rem;
+    }
+
+    main {
+      padding: 2rem 1rem;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .services {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+    }
+
+    .service {
+      background: white;
+      padding: 1.5rem;
+      border-radius: 0.75rem;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    }
+
+    .service h3 {
+      font-family: 'Montserrat', sans-serif;
+      color: #3b1e63;
+      margin-top: 0;
+    }
+
+    form {
+      background: white;
+      padding: 1.5rem;
+      border-radius: 0.75rem;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    }
+
+    form h2 {
+      font-family: 'Montserrat', sans-serif;
+      color: #3b1e63;
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      padding: 0.75rem;
+      margin-bottom: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 0.5rem;
+      font-size: 1rem;
+    }
+
+    button {
+      background-color: #3b1e63;
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: 0.5rem;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1.5rem;
+      background: #eee;
+      margin-top: 3rem;
+    }
+
+    .contact-options {
+      margin-top: 1rem;
+    }
+
+    .contact-options a {
+      display: inline-block;
+      margin: 0.5rem;
+      color: #3b1e63;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .thank-you-message {
+      display: none;
+      background-color: #d4edda;
+      color: #155724;
+      padding: 1rem;
+      border-radius: 0.5rem;
+      margin-top: 1rem;
+    }
+  </style>
+  <script>
+    function handleSubmit(event) {
+      event.preventDefault();
+      const form = event.target;
+      form.style.display = 'none';
+      document.getElementById('thankYou').style.display = 'block';
+    }
+  </script>
+</head>
+
+<body>
+  <header>
+    <img src="favicon-128x128.png" alt="Boriken Tech logo" width="64" height="64" />
+    <h1>Boriken Tech</h1>
+    <p>Affordable Tech Help & Business IT Solutions in Puerto Rico</p>
+  </header>
+
+  <main>
+    <section class="services">
+      <div class="service">
+        <h3>Home & Personal Tech Support</h3>
+        <p>Laptop/PC troubleshooting, Wi-Fi setup, smart home devices, printers, software installs and more.</p>
+        <p><strong>Starting at $40/visit</strong></p>
+      </div>
+      <div class="service">
+        <h3>Small Business IT Solutions</h3>
+        <p>Workstation setup, user & email management, backups, cloud migrations, and secure remote access.</p>
+        <p><strong>Plans from $150/month</strong></p>
+      </div>
+      <div class="service">
+        <h3>Competitive Tech Consulting</h3>
+        <p>Don’t overpay for services you don’t need. Get tailored solutions that fit your business without the big MSP price tag.</p>
+        <p><strong>Consults from $65/hour</strong></p>
+      </div>
+    </section>
+
+    <section>
+      <form name="contact" method="POST" data-netlify="true" onsubmit="handleSubmit(event)">
+        <h2>Contact Me</h2>
+        <input type="text" name="name" placeholder="Your Name" required />
+        <input type="email" name="email" placeholder="Your Email" required />
+        <textarea name="message" rows="5" placeholder="How can I help you?" required></textarea>
+        <button type="submit">Send Message</button>
+        <div class="contact-options">
+          <p>Prefer messaging?</p>
+          <a href="https://wa.me/17873400573" target="_blank">WhatsApp: 787-340-0573</a>
+          <a href="mailto:Jconde26r@gmail.com">Email: Jconde26r@gmail.com</a>
+        </div>
+      </form>
+      <div id="thankYou" class="thank-you-message">
+        <p>Thanks for reaching out! I'll get back to you shortly.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Boriken Tech. All rights reserved.</p>
+  </footer>
+</body>
+
+</html>
