@@ -8,18 +8,36 @@
   <link rel="icon" href="favicon.ico" />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
   <style>
+    :root {
+      --primary-color: #3b1e63;
+      --bg-light: #f8f9fb;
+      --bg-dark: #1e1e2f;
+      --text-light: #ffffff;
+      --text-dark: #333333;
+      --card-bg-light: white;
+      --card-bg-dark: #2a2a3d;
+      --shadow-light: rgba(0, 0, 0, 0.05);
+    }
+
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background-color: #f8f9fb;
-      color: #333;
+      background-color: var(--bg-light);
+      color: var(--text-dark);
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+
+    body.dark {
+      background-color: var(--bg-dark);
+      color: var(--text-light);
     }
 
     header {
-      background-color: #3b1e63;
+      background-color: var(--primary-color);
       padding: 2rem 1rem;
       text-align: center;
       color: white;
+      position: relative;
     }
 
     header h1 {
@@ -30,6 +48,24 @@
 
     header p {
       font-size: 1.2rem;
+    }
+
+    .theme-toggle {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: white;
+      color: var(--primary-color);
+      border: none;
+      border-radius: 1rem;
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    body.dark .theme-toggle {
+      background: #333;
+      color: white;
     }
 
     main {
@@ -46,28 +82,70 @@
     }
 
     .service {
-      background: white;
+      background: var(--card-bg-light);
       padding: 1.5rem;
       border-radius: 0.75rem;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+      box-shadow: 0 4px 8px var(--shadow-light);
+      transition: transform 0.2s ease, background 0.3s ease;
+    }
+
+    .service:hover {
+      transform: translateY(-4px);
+    }
+
+    body.dark .service {
+      background: var(--card-bg-dark);
     }
 
     .service h3 {
       font-family: 'Montserrat', sans-serif;
-      color: #3b1e63;
+      color: var(--primary-color);
       margin-top: 0;
     }
 
+    details summary {
+      cursor: pointer;
+      color: var(--primary-color);
+      font-weight: bold;
+      margin-top: 1rem;
+      transition: color 0.3s ease;
+    }
+
+    details[open] summary {
+      margin-bottom: 0.5rem;
+    }
+
+    details > *:not(summary) {
+      animation: expand 0.3s ease-in-out;
+    }
+
+    @keyframes expand {
+      from {
+        opacity: 0;
+        transform: scaleY(0.95);
+      }
+
+      to {
+        opacity: 1;
+        transform: scaleY(1);
+      }
+    }
+
     form {
-      background: white;
+      background: var(--card-bg-light);
       padding: 1.5rem;
       border-radius: 0.75rem;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+      box-shadow: 0 4px 8px var(--shadow-light);
+      transition: background 0.3s ease;
+    }
+
+    body.dark form {
+      background: var(--card-bg-dark);
     }
 
     form h2 {
       font-family: 'Montserrat', sans-serif;
-      color: #3b1e63;
+      color: var(--primary-color);
     }
 
     input,
@@ -81,7 +159,7 @@
     }
 
     button {
-      background-color: #3b1e63;
+      background-color: var(--primary-color);
       color: white;
       padding: 0.75rem 1.5rem;
       border: none;
@@ -104,7 +182,7 @@
     .contact-options a {
       display: inline-block;
       margin: 0.5rem;
-      color: #3b1e63;
+      color: var(--primary-color);
       text-decoration: none;
       font-weight: bold;
     }
@@ -117,6 +195,11 @@
       border-radius: 0.5rem;
       margin-top: 1rem;
     }
+
+    body.dark .thank-you-message {
+      background-color: #375c46;
+      color: #d0f1dc;
+    }
   </style>
   <script>
     function handleSubmit(event) {
@@ -124,6 +207,10 @@
       const form = event.target;
       form.style.display = 'none';
       document.getElementById('thankYou').style.display = 'block';
+    }
+
+    function toggleTheme() {
+      document.body.classList.toggle('dark');
     }
   </script>
 </head>
@@ -133,27 +220,98 @@
     <img src="favicon-128x128.png" alt="Boriken Tech logo" width="64" height="64" />
     <h1>Boriken Tech</h1>
     <p>Affordable Tech Help & Business IT Solutions in Puerto Rico</p>
+    <button class="theme-toggle" onclick="toggleTheme()">Toggle Theme</button>
   </header>
 
   <main>
+    <!-- About Me -->
+    <section class="service" style="margin-bottom: 2rem;">
+      <h2 style="color:#3b1e63; font-family:'Montserrat', sans-serif;">About Me</h2>
+      <p>Hello! I'm a seasoned IT professional based in Puerto Rico with years of hands-on experience managing networks, supporting workstations, recovering data, and solving everyday tech headaches for both homes and businesses.</p>
+      <p>After years working for companies that charge too much and send someone else to do the job, I decided to become your direct line to real help—no middleman. Boriken Tech is my one-man mission to bring expert-level service to individuals and small businesses without the bloated costs of large MSPs. You get transparent pricing, quick response, and a tech guy who actually knows your setup.</p>
+    </section>
+
+    <!-- Services -->
     <section class="services">
       <div class="service">
         <h3>Home & Personal Tech Support</h3>
-        <p>Laptop/PC troubleshooting, Wi-Fi setup, smart home devices, printers, software installs and more.</p>
+        <p>Laptop/PC troubleshooting, Wi-Fi setup, smart home devices, printers, software installs, and more.</p>
+        <details>
+          <summary>Learn More</summary>
+          <ul>
+            <li>System tune-ups & slow PC fixes</li>
+            <li>Virus & malware scanning/removal</li>
+            <li>Software installation & updates</li>
+            <li>Driver installation & OS updates</li>
+            <li>New device setup (printers, smart home, etc.)</li>
+          </ul>
+        </details>
         <p><strong>Starting at $40/visit</strong></p>
       </div>
+
       <div class="service">
         <h3>Small Business IT Solutions</h3>
         <p>Workstation setup, user & email management, backups, cloud migrations, and secure remote access.</p>
+        <details>
+          <summary>Learn More</summary>
+          <ul>
+            <li>Ongoing PC/server maintenance</li>
+            <li>Microsoft 365 & Google Workspace setup</li>
+            <li>On-prem & cloud backup solutions</li>
+            <li>VPN & secure remote workflows</li>
+            <li>Email and identity access management</li>
+          </ul>
+        </details>
         <p><strong>Plans from $150/month</strong></p>
       </div>
+
       <div class="service">
         <h3>Competitive Tech Consulting</h3>
-        <p>Don’t overpay for services you don’t need. Get tailored solutions that fit your business without the big MSP price tag.</p>
+        <p>Skip overpriced MSPs. I help you understand what you really need—no upselling, no fluff.</p>
+        <details>
+          <summary>Learn More</summary>
+          <ul>
+            <li>New office tech planning</li>
+            <li>Security and backup audits</li>
+            <li>Cost-cutting strategies on cloud/IT tools</li>
+            <li>Small office server optimization</li>
+          </ul>
+        </details>
         <p><strong>Consults from $65/hour</strong></p>
+      </div>
+
+      <div class="service">
+        <h3>Server Health Checks & Tune-Ups</h3>
+        <p>Many providers overcharge for simple server work. I offer honest, affordable checkups.</p>
+        <details>
+          <summary>Learn More</summary>
+          <ul>
+            <li>Windows Server updates & patching</li>
+            <li>Disk space, services & performance review</li>
+            <li>Backup validation & storage health</li>
+            <li>Uptime monitoring setup</li>
+          </ul>
+        </details>
+        <p><strong>Basic checkups from $60/server</strong></p>
+      </div>
+
+      <div class="service">
+        <h3>Data Backup & Recovery</h3>
+        <p>Accidentally deleted a file? Computer won’t start? I’ve helped many recover data successfully.</p>
+        <details>
+          <summary>Learn More</summary>
+          <ul>
+            <li>External drive backup setups</li>
+            <li>Cloud sync troubleshooting (Google Drive, OneDrive, Dropbox)</li>
+            <li>Data recovery attempts from dead PCs or damaged drives</li>
+            <li>Migration to new devices without data loss</li>
+          </ul>
+        </details>
+        <p><strong>Starts at $45 for basic backup | Recovery from $75</strong></p>
       </div>
     </section>
 
+    <!-- Contact -->
     <section>
       <form name="contact" method="POST" data-netlify="true" onsubmit="handleSubmit(event)">
         <h2>Contact Me</h2>
