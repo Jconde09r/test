@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Boriken Tech | IT Solutions in Puerto Rico</title>
+  <title data-lang-key="pageTitle">Boriken Tech | IT Solutions in Puerto Rico</title>
   <link rel="icon" href="favicon.ico" />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
   <style>
@@ -13,6 +13,7 @@
       --text-dark: #333333;
       --card-bg-light: white;
       --shadow-light: rgba(0, 0, 0, 0.05);
+      --footer-bg: #eee; /* Added for footer background color */
     }
 
     body {
@@ -20,6 +21,7 @@
       font-family: Arial, sans-serif;
       background-color: var(--bg-light);
       color: var(--text-dark);
+      transition: background 0.3s ease, color 0.3s ease;
     }
 
     header {
@@ -40,17 +42,17 @@
       font-size: 1.2rem;
     }
 
-    .lang-toggle {
+    .language-toggle {
       position: absolute;
       top: 1rem;
       right: 1rem;
       background: white;
       color: var(--primary-color);
       border: none;
+      border-radius: 1rem;
       padding: 0.5rem 1rem;
-      border-radius: 0.5rem;
-      font-weight: bold;
       cursor: pointer;
+      font-weight: bold;
     }
 
     main {
@@ -71,7 +73,7 @@
       padding: 1.5rem;
       border-radius: 0.75rem;
       box-shadow: 0 4px 8px var(--shadow-light);
-      transition: transform 0.2s ease;
+      transition: transform 0.2s ease, background 0.3s ease;
     }
 
     .service:hover {
@@ -92,11 +94,31 @@
       transition: color 0.3s ease;
     }
 
+    details[open] summary {
+      margin-bottom: 0.5rem;
+    }
+
+    details > *:not(summary) {
+      animation: expand 0.3s ease-in-out;
+    }
+
+    @keyframes expand {
+      from {
+        opacity: 0;
+        transform: scaleY(0.95);
+      }
+      to {
+        opacity: 1;
+        transform: scaleY(1);
+      }
+    }
+
     form {
       background: var(--card-bg-light);
       padding: 1.5rem;
       border-radius: 0.75rem;
       box-shadow: 0 4px 8px var(--shadow-light);
+      transition: background 0.3s ease;
     }
 
     form h2 {
@@ -104,8 +126,10 @@
       color: var(--primary-color);
     }
 
-    input, textarea {
-      width: 100%;
+    input,
+    textarea {
+      width: 100%; /* Adjusted for box-sizing */
+      box-sizing: border-box; /* Added for better width control */
       padding: 0.75rem;
       margin-bottom: 1rem;
       border: 1px solid #ccc;
@@ -113,7 +137,7 @@
       font-size: 1rem;
     }
 
-    button {
+    button { /* General button styling */
       background-color: var(--primary-color);
       color: white;
       padding: 0.75rem 1.5rem;
@@ -123,13 +147,42 @@
       cursor: pointer;
     }
 
+    footer {
+      text-align: center;
+      padding: 3rem 1.5rem; /* Increased padding for better image visibility */
+      background-color: var(--footer-bg); /* Fallback color */
+      margin-top: 3rem;
+      position: relative; /* Needed for pseudo-element background */
+      color: var(--text-dark); /* Ensure text is readable */
+      z-index: 0; /* Ensure content is above pseudo-element */
+    }
+
+    footer::before { /* Pseudo-element for background image */
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('images/Back view.jpg'); /* Ensure this path is correct */
+      background-size: cover;
+      background-position: center;
+      opacity: 0.25; /* Adjust for desired transparency */
+      z-index: -1; /* Place background behind content */
+    }
+
+
     .contact-options {
       margin-top: 1rem;
     }
 
+    .contact-options p {
+      margin-bottom: 0.5rem; /* Added margin for spacing */
+    }
+
     .contact-options a {
       display: inline-block;
-      margin: 0.5rem;
+      margin: 0.25rem 0.5rem 0.25rem 0; /* Adjusted margin */
       color: var(--primary-color);
       text-decoration: none;
       font-weight: bold;
@@ -143,73 +196,306 @@
       border-radius: 0.5rem;
       margin-top: 1rem;
     }
-
-    footer {
-      text-align: center;
-      padding: 2rem 1rem;
-      background: #eee url("Back view.jpg") no-repeat center bottom;
-      background-size: cover;
-      background-blend-mode: multiply;
-      color: white;
-      position: relative;
-    }
-
-    footer::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: rgba(0,0,0,0.4);
-      z-index: 0;
-    }
-
-    footer p {
-      position: relative;
-      z-index: 1;
-    }
   </style>
 </head>
 
 <body>
   <header>
     <img src="favicon-128x128.png" alt="Boriken Tech logo" width="64" height="64" />
-    <h1 id="site-title">Boriken Tech</h1>
-    <p id="site-tagline">Affordable Tech Help & Business IT Solutions in Puerto Rico</p>
-    <button class="lang-toggle" onclick="toggleLanguage()">🇵🇷 Toggle Spanish</button>
+    <h1 data-lang-key="headerTitle">Boriken Tech</h1>
+    <p data-lang-key="headerSubtitle">Affordable Tech Help & Business IT Solutions in Puerto Rico</p>
+    <button class="language-toggle" onclick="toggleLanguage()" id="languageToggleButton" data-lang-key="toggleLanguageButton">
+      Toggle Spanish 🇵🇷
+    </button>
   </header>
 
   <main>
     <section class="service" style="margin-bottom: 2rem;">
-      <h2 id="about-heading" style="color:#3b1e63; font-family:'Montserrat', sans-serif;">About Me</h2>
-      <p id="about-para1">Hello! I'm a seasoned IT professional based in Puerto Rico with years of hands-on experience managing networks, supporting workstations, recovering data, and solving everyday tech headaches for both homes and businesses.</p>
-      <p id="about-para2">After years working for companies that charge too much and send someone else to do the job, I decided to become your direct line to real help—no middleman. Boriken Tech is my one-man mission to bring expert-level service to individuals and small businesses without the bloated costs of large MSPs. You get transparent pricing, quick response, and a tech guy who actually knows your setup.</p>
+      <h2 style="color:#3b1e63; font-family:'Montserrat', sans-serif;" data-lang-key="aboutMeTitle">About Me</h2>
+      <p data-lang-key="aboutMeP1">Hello! I'm a seasoned IT professional based in Puerto Rico with years of hands-on experience managing networks, supporting workstations, recovering data, and solving everyday tech headaches for both homes and businesses.</p>
+      <p data-lang-key="aboutMeP2">After years working for companies that charge too much and send someone else to do the job, I decided to become your direct line to real help—no middleman. Boriken Tech is my one-man mission to bring expert-level service to individuals and small businesses without the bloated costs of large MSPs. You get transparent pricing, quick response, and a tech guy who actually knows your setup.</p>
     </section>
 
-    <!-- Services Placeholder (unchanged for this version) -->
+    <section class="services">
+      <div class="service">
+        <h3 data-lang-key="service1Title">Home & Personal Tech Support</h3>
+        <p data-lang-key="service1Desc">Laptop/PC troubleshooting, Wi-Fi setup, smart home devices, printers, software installs, and more.</p>
+        <details>
+          <summary data-lang-key="learnMore">Learn More</summary>
+          <ul>
+            <li data-lang-key="service1Item1">System tune-ups & slow PC fixes</li>
+            <li data-lang-key="service1Item2">Virus & malware scanning/removal</li>
+            <li data-lang-key="service1Item3">Software installation & updates</li>
+            <li data-lang-key="service1Item4">Driver installation & OS updates</li>
+            <li data-lang-key="service1Item5">New device setup (printers, smart home, etc.)</li>
+          </ul>
+        </details>
+        <p><strong data-lang-key="service1Price">Starting at $40/visit</strong></p>
+      </div>
+
+      <div class="service">
+        <h3 data-lang-key="service2Title">Small Business IT Solutions</h3>
+        <p data-lang-key="service2Desc">Workstation setup, user & email management, backups, cloud migrations, and secure remote access.</p>
+        <details>
+          <summary data-lang-key="learnMore">Learn More</summary> <ul>
+            <li data-lang-key="service2Item1">Ongoing PC/server maintenance</li>
+            <li data-lang-key="service2Item2">Microsoft 365 & Google Workspace setup</li>
+            <li data-lang-key="service2Item3">On-prem & cloud backup solutions</li>
+            <li data-lang-key="service2Item4">VPN & secure remote workflows</li>
+            <li data-lang-key="service2Item5">Email and identity access management</li>
+          </ul>
+        </details>
+        <p><strong data-lang-key="service2Price">Plans from $150/month</strong></p>
+      </div>
+
+      <div class="service">
+        <h3 data-lang-key="service3Title">Competitive Tech Consulting</h3>
+        <p data-lang-key="service3Desc">Skip overpriced MSPs. I help you understand what you really need—no upselling, no fluff.</p>
+        <details>
+          <summary data-lang-key="learnMore">Learn More</summary>
+          <ul>
+            <li data-lang-key="service3Item1">New office tech planning</li>
+            <li data-lang-key="service3Item2">Security and backup audits</li>
+            <li data-lang-key="service3Item3">Cost-cutting strategies on cloud/IT tools</li>
+            <li data-lang-key="service3Item4">Small office server optimization</li>
+          </ul>
+        </details>
+        <p><strong data-lang-key="service3Price">Consults from $65/hour</strong></p>
+      </div>
+
+      <div class="service">
+        <h3 data-lang-key="service4Title">Server Health Checks & Tune-Ups</h3>
+        <p data-lang-key="service4Desc">Many providers overcharge for simple server work. I offer honest, affordable checkups.</p>
+        <details>
+          <summary data-lang-key="learnMore">Learn More</summary>
+          <ul>
+            <li data-lang-key="service4Item1">Windows Server updates & patching</li>
+            <li data-lang-key="service4Item2">Disk space, services & performance review</li>
+            <li data-lang-key="service4Item3">Backup validation & storage health</li>
+            <li data-lang-key="service4Item4">Uptime monitoring setup</li>
+          </ul>
+        </details>
+        <p><strong data-lang-key="service4Price">Basic checkups from $60/server</strong></p>
+      </div>
+
+      <div class="service">
+        <h3 data-lang-key="service5Title">Data Backup & Recovery</h3>
+        <p data-lang-key="service5Desc">Accidentally deleted a file? Computer won’t start? I’ve helped many recover data successfully.</p>
+        <details>
+          <summary data-lang-key="learnMore">Learn More</summary>
+          <ul>
+            <li data-lang-key="service5Item1">External drive backup setups</li>
+            <li data-lang-key="service5Item2">Cloud sync troubleshooting (Google Drive, OneDrive, Dropbox)</li>
+            <li data-lang-key="service5Item3">Data recovery attempts from dead PCs or damaged drives</li>
+            <li data-lang-key="service5Item4">Migration to new devices without data loss</li>
+          </ul>
+        </details>
+        <p><strong data-lang-key="service5Price">Starts at $45 for basic backup | Recovery from $75</strong></p>
+      </div>
+    </section>
 
     <section>
       <form name="contact" method="POST" data-netlify="true" onsubmit="handleSubmit(event)">
-        <h2 id="contact-title">Contact Me</h2>
-        <input type="text" name="name" placeholder="Your Name" required />
-        <input type="email" name="email" placeholder="Your Email" required />
-        <textarea name="message" rows="5" placeholder="How can I help you?" required></textarea>
-        <button type="submit">Send Message</button>
+        <h2 data-lang-key="contactTitle">Contact Me</h2>
+        <input type="text" name="name" placeholder="Your Name" required data-lang-placeholder-key="formNamePlaceholder" />
+        <input type="email" name="email" placeholder="Your Email" required data-lang-placeholder-key="formEmailPlaceholder" />
+        <textarea name="message" rows="5" placeholder="How can I help you?" required data-lang-placeholder-key="formMessagePlaceholder"></textarea>
+        <button type="submit" data-lang-key="formSubmitButton">Send Message</button>
         <div class="contact-options">
-          <p id="prefer-msg">Prefer messaging?</p>
-          <a href="https://wa.me/17873400573" target="_blank">WhatsApp: 787-340-0573</a>
-          <a href="mailto:Jconde26r@gmail.com">Email: Jconde26r@gmail.com</a>
+          <p data-lang-key="preferMessaging">Prefer messaging?</p>
+          <a href="https://wa.me/17873400573" target="_blank" data-lang-key="contactWhatsapp">WhatsApp: 787-340-0573</a>
+          <a href="mailto:Jconde26r@gmail.com" data-lang-key="contactEmail">Email: Jconde26r@gmail.com</a>
         </div>
       </form>
       <div id="thankYou" class="thank-you-message">
-        <p>Thanks for reaching out! I'll get back to you shortly.</p>
+        <p data-lang-key="thankYouMsg">Thanks for reaching out! I'll get back to you shortly.</p>
       </div>
     </section>
   </main>
 
   <footer>
-    <p>&copy; 2025 Boriken Tech. All rights reserved.</p>
+    <p data-lang-key="footerCopyright">&copy; 2025 Boriken Tech. All rights reserved.</p>
   </footer>
 
   <script>
+    // --- LANGUAGE TOGGLE SCRIPT ---
+    let currentLanguage = 'en'; // Default language
+
+    // **IMPORTANT: FILL IN YOUR SPANISH TRANSLATIONS HERE**
+    const translations = {
+      en: {
+        pageTitle: "Boriken Tech | IT Solutions in Puerto Rico",
+        headerTitle: "Boriken Tech",
+        headerSubtitle: "Affordable Tech Help & Business IT Solutions in Puerto Rico",
+        toggleLanguageButton: "Toggle Spanish 🇵🇷",
+        aboutMeTitle: "About Me",
+        aboutMeP1: "Hello! I'm a seasoned IT professional based in Puerto Rico with years of hands-on experience managing networks, supporting workstations, recovering data, and solving everyday tech headaches for both homes and businesses.",
+        aboutMeP2: "After years working for companies that charge too much and send someone else to do the job, I decided to become your direct line to real help—no middleman. Boriken Tech is my one-man mission to bring expert-level service to individuals and small businesses without the bloated costs of large MSPs. You get transparent pricing, quick response, and a tech guy who actually knows your setup.",
+        learnMore: "Learn More",
+        service1Title: "Home & Personal Tech Support",
+        service1Desc: "Laptop/PC troubleshooting, Wi-Fi setup, smart home devices, printers, software installs, and more.",
+        service1Item1: "System tune-ups & slow PC fixes",
+        service1Item2: "Virus & malware scanning/removal",
+        service1Item3: "Software installation & updates",
+        service1Item4: "Driver installation & OS updates",
+        service1Item5: "New device setup (printers, smart home, etc.)",
+        service1Price: "Starting at $40/visit",
+        service2Title: "Small Business IT Solutions",
+        service2Desc: "Workstation setup, user & email management, backups, cloud migrations, and secure remote access.",
+        service2Item1: "Ongoing PC/server maintenance",
+        service2Item2: "Microsoft 365 & Google Workspace setup",
+        service2Item3: "On-prem & cloud backup solutions",
+        service2Item4: "VPN & secure remote workflows",
+        service2Item5: "Email and identity access management",
+        service2Price: "Plans from $150/month",
+        service3Title: "Competitive Tech Consulting",
+        service3Desc: "Skip overpriced MSPs. I help you understand what you really need—no upselling, no fluff.",
+        service3Item1: "New office tech planning",
+        service3Item2: "Security and backup audits",
+        service3Item3: "Cost-cutting strategies on cloud/IT tools",
+        service3Item4: "Small office server optimization",
+        service3Price: "Consults from $65/hour",
+        service4Title: "Server Health Checks & Tune-Ups",
+        service4Desc: "Many providers overcharge for simple server work. I offer honest, affordable checkups.",
+        service4Item1: "Windows Server updates & patching",
+        service4Item2: "Disk space, services & performance review",
+        service4Item3: "Backup validation & storage health",
+        service4Item4: "Uptime monitoring setup",
+        service4Price: "Basic checkups from $60/server",
+        service5Title: "Data Backup & Recovery",
+        service5Desc: "Accidentally deleted a file? Computer won’t start? I’ve helped many recover data successfully.",
+        service5Item1: "External drive backup setups",
+        service5Item2: "Cloud sync troubleshooting (Google Drive, OneDrive, Dropbox)",
+        service5Item3: "Data recovery attempts from dead PCs or damaged drives",
+        service5Item4: "Migration to new devices without data loss",
+        service5Price: "Starts at $45 for basic backup | Recovery from $75",
+        contactTitle: "Contact Me",
+        formNamePlaceholder: "Your Name",
+        formEmailPlaceholder: "Your Email",
+        formMessagePlaceholder: "How can I help you?",
+        formSubmitButton: "Send Message",
+        preferMessaging: "Prefer messaging?",
+        contactWhatsapp: "WhatsApp: 787-340-0573", // Keep numbers, translate text part if needed
+        contactEmail: "Email: Jconde26r@gmail.com", // Keep email, translate text part if needed
+        thankYouMsg: "Thanks for reaching out! I'll get back to you shortly.",
+        footerCopyright: "&copy; 2025 Boriken Tech. All rights reserved."
+      },
+      es: { // PUERTO RICAN SPANISH TRANSLATIONS - PLEASE FILL THESE IN
+        pageTitle: "Boriken Tech | Soluciones de IT en Puerto Rico",
+        headerTitle: "Boriken Tech",
+        headerSubtitle: "Ayuda Tecnológica Accesible y Soluciones IT para Negocios en Puerto Rico",
+        toggleLanguageButton: "Cambiar a Inglés 🇺🇸",
+        aboutMeTitle: "Sobre Mí",
+        aboutMeP1: "¡Hola! Soy un profesional de IT con base en Puerto Rico y años de experiencia práctica administrando redes, brindando soporte a estaciones de trabajo, recuperando datos y resolviendo problemas tecnológicos cotidianos tanto para hogares como para empresas.",
+        aboutMeP2: "Después de años trabajando para compañías que cobran demasiado y envían a otra persona a hacer el trabajo, decidí convertirme en tu línea directa a la ayuda real, sin intermediarios. Boriken Tech es mi misión unipersonal para ofrecer servicio de nivel experto a individuos y pequeñas empresas sin los costos inflados de los grandes MSP. Obtienes precios transparentes, respuesta rápida y un técnico que realmente conoce tu configuración.",
+        learnMore: "Aprende Más", // Or "Saber Más", "Detalles"
+        service1Title: "Soporte Técnico Personal y para el Hogar",
+        service1Desc: "Resolución de problemas de laptop/PC, configuración de Wi-Fi, dispositivos inteligentes, impresoras, instalación de software y más.",
+        service1Item1: "Optimización de sistemas y solución a PCs lentas",
+        service1Item2: "Escaneo y eliminación de virus y malware",
+        service1Item3: "Instalación y actualización de software",
+        service1Item4: "Instalación de drivers y actualizaciones de SO",
+        service1Item5: "Configuración de nuevos dispositivos (impresoras, hogar inteligente, etc.)",
+        service1Price: "Desde $40/visita",
+        service2Title: "Soluciones IT para Pequeñas Empresas",
+        service2Desc: "Configuración de estaciones de trabajo, gestión de usuarios y correo, copias de seguridad, migraciones a la nube y acceso remoto seguro.",
+        service2Item1: "Mantenimiento continuo de PC/servidores",
+        service2Item2: "Configuración de Microsoft 365 y Google Workspace",
+        service2Item3: "Soluciones de respaldo local y en la nube",
+        service2Item4: "VPN y flujos de trabajo remotos seguros",
+        service2Item5: "Gestión de correo electrónico y acceso de identidad",
+        service2Price: "Planes desde $150/mes",
+        service3Title: "Consultoría Tecnológica Competitiva",
+        service3Desc: "Evita MSPs caros. Te ayudo a entender lo que realmente necesitas, sin ventas adicionales ni palabrería.",
+        service3Item1: "Planificación tecnológica para nuevas oficinas",
+        service3Item2: "Auditorías de seguridad y copias de seguridad",
+        service3Item3: "Estrategias de reducción de costos en herramientas de nube/IT",
+        service3Item4: "Optimización de servidores para oficinas pequeñas",
+        service3Price: "Consultas desde $65/hora",
+        service4Title: "Chequeos y Afinaciones de Servidores",
+        service4Desc: "Muchos proveedores cobran de más por trabajo simple de servidor. Ofrezco chequeos honestos y asequibles.",
+        service4Item1: "Actualizaciones y parches de Windows Server",
+        service4Item2: "Revisión de espacio en disco, servicios y rendimiento",
+        service4Item3: "Validación de copias de seguridad y salud del almacenamiento",
+        service4Item4: "Configuración de monitoreo de tiempo de actividad",
+        service4Price: "Chequeos básicos desde $60/servidor",
+        service5Title: "Respaldo y Recuperación de Datos",
+        service5Desc: "¿Borraste un archivo por accidente? ¿La computadora no enciende? He ayudado a muchos a recuperar datos exitosamente.",
+        service5Item1: "Configuraciones de respaldo en discos externos",
+        service5Item2: "Solución de problemas de sincronización en la nube (Google Drive, OneDrive, Dropbox)",
+        service5Item3: "Intentos de recuperación de datos de PCs dañadas o discos duros defectuosos",
+        service5Item4: "Migración a nuevos dispositivos sin pérdida de datos",
+        service5Price: "Desde $45 por respaldo básico | Recuperación desde $75",
+        contactTitle: "Contáctame",
+        formNamePlaceholder: "Tu Nombre",
+        formEmailPlaceholder: "Tu Correo Electrónico",
+        formMessagePlaceholder: "¿Cómo puedo ayudarte?",
+        formSubmitButton: "Enviar Mensaje",
+        preferMessaging: "¿Prefieres mensajería?",
+        contactWhatsapp: "WhatsApp: 787-340-0573", // Keep number
+        contactEmail: "Correo: Jconde26r@gmail.com",   // Keep email
+        thankYouMsg: "¡Gracias por contactarme! Te responderé en breve.",
+        footerCopyright: "&copy; 2025 Boriken Tech. Todos los derechos reservados."
+      }
+    };
+
+    function applyTranslations() {
+      document.documentElement.lang = currentLanguage;
+      document.querySelectorAll('[data-lang-key]').forEach(element => {
+        const key = element.getAttribute('data-lang-key');
+        if (translations[currentLanguage] && translations[currentLanguage][key]) {
+          // For input placeholders, we need to set the placeholder attribute
+          if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
+            const placeholderKey = element.getAttribute('data-lang-placeholder-key');
+            if (placeholderKey && translations[currentLanguage][placeholderKey]) {
+                 element.placeholder = translations[currentLanguage][placeholderKey];
+            } else if (translations[currentLanguage][key]) { // fallback to data-lang-key for elements like buttons if placeholder key isn't specific
+                 element.textContent = translations[currentLanguage][key];
+            }
+          } else { // For other elements, set textContent
+            element.textContent = translations[currentLanguage][key];
+          }
+        }
+      });
+
+      // Specifically for elements with HTML content like prices with <strong>
+       const priceElementsMap = {
+        en: {
+            service1Price: "<strong>Starting at $40/visit</strong>",
+            service2Price: "<strong>Plans from $150/month</strong>",
+            service3Price: "<strong>Consults from $65/hour</strong>",
+            service4Price: "<strong>Basic checkups from $60/server</strong>",
+            service5Price: "<strong>Starts at $45 for basic backup | Recovery from $75</strong>"
+        },
+        es: { // **PLEASE PROVIDE SPANISH VERSIONS FOR THESE, MAINTAINING HTML STRUCTURE**
+            service1Price: "<strong>Desde $40/visita</strong>",
+            service2Price: "<strong>Planes desde $150/mes</strong>",
+            service3Price: "<strong>Consultas desde $65/hora</strong>",
+            service4Price: "<strong>Chequeos básicos desde $60/servidor</strong>",
+            service5Price: "<strong>Desde $45 por respaldo básico | Recuperación desde $75</strong>"
+        }
+      };
+
+      document.querySelectorAll('[data-lang-key*="Price"]').forEach(element => {
+          const key = element.getAttribute('data-lang-key');
+          if(priceElementsMap[currentLanguage] && priceElementsMap[currentLanguage][key]) {
+              element.innerHTML = priceElementsMap[currentLanguage][key];
+          }
+      });
+
+      // Update language toggle button text specifically
+      const langButton = document.getElementById('languageToggleButton');
+      if (langButton) {
+        langButton.textContent = translations[currentLanguage].toggleLanguageButton;
+      }
+    }
+
+    function toggleLanguage() {
+      currentLanguage = currentLanguage === 'en' ? 'es' : 'en';
+      localStorage.setItem('preferredLanguage', currentLanguage); // Save preference
+      applyTranslations();
+    }
+
     function handleSubmit(event) {
       event.preventDefault();
       const form = event.target;
@@ -217,23 +503,15 @@
       document.getElementById('thankYou').style.display = 'block';
     }
 
-    let spanish = false;
-    function toggleLanguage() {
-      spanish = !spanish;
-      document.getElementById('site-title').textContent = spanish ? 'Boriken Tech' : 'Boriken Tech';
-      document.getElementById('site-tagline').textContent = spanish
-        ? 'Ayuda Tecnológica y Soluciones IT para Negocios en Puerto Rico'
-        : 'Affordable Tech Help & Business IT Solutions in Puerto Rico';
-      document.getElementById('about-heading').textContent = spanish ? 'Sobre Mí' : 'About Me';
-      document.getElementById('about-para1').textContent = spanish
-        ? '¡Hola! Soy un profesional de IT con sede en Puerto Rico, con años de experiencia práctica administrando redes, dando soporte a computadoras, recuperando datos y resolviendo dolores de cabeza tecnológicos tanto en hogares como en negocios.'
-        : 'Hello! I\'m a seasoned IT professional based in Puerto Rico with years of hands-on experience managing networks, supporting workstations, recovering data, and solving everyday tech headaches for both homes and businesses.';
-      document.getElementById('about-para2').textContent = spanish
-        ? 'Después de trabajar años para compañías que cobran demasiado y envían a alguien más a hacer el trabajo, decidí convertirme en tu contacto directo para ayuda real—sin intermediarios. Boriken Tech es mi misión personal para brindar servicios de nivel experto a individuos y pequeños negocios sin los costos inflados de los MSP grandes. Obtienes precios transparentes, respuesta rápida y un técnico que realmente conoce tu sistema.'
-        : 'After years working for companies that charge too much and send someone else to do the job, I decided to become your direct line to real help—no middleman. Boriken Tech is my one-man mission to bring expert-level service to individuals and small businesses without the bloated costs of large MSPs. You get transparent pricing, quick response, and a tech guy who actually knows your setup.';
-      document.getElementById('contact-title').textContent = spanish ? 'Contáctame' : 'Contact Me';
-      document.getElementById('prefer-msg').textContent = spanish ? '¿Prefieres mensajear?' : 'Prefer messaging?';
-    }
+    // On page load, check for saved language preference
+    document.addEventListener('DOMContentLoaded', () => {
+      const savedLanguage = localStorage.getItem('preferredLanguage');
+      if (savedLanguage) {
+        currentLanguage = savedLanguage;
+      }
+      applyTranslations();
+    });
+
   </script>
 </body>
 </html>
