@@ -82,11 +82,10 @@
       transform: translateY(-4px);
     }
 
-    /* === STYLING FOR "ABOUT ME" SECTION BACKGROUND === */
     #about-me-section {
-      background-color: transparent !important; /* Override .service background to see pseudo-element */
-      position: relative; /* For positioning the pseudo-element */
-      z-index: 0; /* To allow pseudo-element to be behind */
+      background-color: transparent !important; 
+      position: relative; 
+      z-index: 0; 
     }
 
     #about-me-section::before {
@@ -96,15 +95,13 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background-image: url('images/Back view.jpg'); /* Ensure this path is correct */
+      background-image: url('images/Back view.jpg'); 
       background-size: cover;
       background-position: center;
-      opacity: 0.15; /* Adjust for desired transparency - try 0.1 to 0.3 */
-      z-index: -1; /* Place background behind content */
-      border-radius: 0.75rem; /* Match the parent's border-radius */
+      opacity: 0.15; 
+      z-index: -1; 
+      border-radius: 0.75rem; 
     }
-    /* === END OF STYLING FOR "ABOUT ME" SECTION === */
-
 
     .service h3 {
       font-family: 'Montserrat', sans-serif;
@@ -165,7 +162,7 @@
       font-size: 1rem;
     }
 
-    button { /* General button styling */
+    button { 
       background-color: var(--primary-color);
       color: white;
       padding: 0.75rem 1.5rem;
@@ -175,11 +172,9 @@
       cursor: pointer;
     }
     
-    /* Specific styling for the form submit button if needed, otherwise it uses general button style */
     form button[type="submit"] { 
       /* Add specific styles here if different from language-toggle button */
     }
-
 
     footer {
       text-align: center;
@@ -204,13 +199,20 @@
       font-weight: bold;
     }
 
-    .thank-you-message {
+    .thank-you-message { /* Used for both success and error messages, specific styling below */
       display: none;
-      background-color: #d4edda;
-      color: #155724;
       padding: 1rem;
       border-radius: 0.5rem;
       margin-top: 1rem;
+      text-align: center;
+    }
+    #thankYou { /* Success message specific */
+        background-color: #d4edda;
+        color: #155724;
+    }
+    #formError { /* Error message specific */
+        background-color: #f8d7da;
+        color: #721c24;
     }
   </style>
 </head>
@@ -312,7 +314,7 @@
     </section>
 
     <section>
-      <form name="contact" method="POST" data-netlify="true" onsubmit="handleSubmit(event)">
+      <form id="contactForm" name="contact" method="POST" action="https://formspree.io/f/xvgrpyne">
         <h2 data-lang-key="contactTitle">Contact Me</h2>
         <input type="text" name="name" placeholder="Your Name" required data-lang-placeholder-key="formNamePlaceholder" />
         <input type="email" name="email" placeholder="Your Email" required data-lang-placeholder-key="formEmailPlaceholder" />
@@ -327,6 +329,9 @@
       <div id="thankYou" class="thank-you-message">
         <p data-lang-key="thankYouMsg">Thanks for reaching out! I'll get back to you shortly.</p>
       </div>
+      <div id="formError" class="thank-you-message"> {/* Style adjusted in CSS block */}
+          <p data-lang-key="formErrorMsg">Oops! Something went wrong. Please try again or contact me directly.</p>
+      </div>
     </section>
   </main>
 
@@ -336,9 +341,8 @@
 
   <script>
     // --- LANGUAGE TOGGLE SCRIPT ---
-    let currentLanguage = 'en'; // Default language
+    let currentLanguage = 'en'; 
 
-    // **IMPORTANT: FILL IN YOUR SPANISH TRANSLATIONS HERE WHERE INDICATED**
     const translations = {
       en: {
         pageTitle: "Boriken Tech | IT Solutions in Puerto Rico",
@@ -356,7 +360,6 @@
         service1Item3: "Software installation & updates",
         service1Item4: "Driver installation & OS updates",
         service1Item5: "New device setup (printers, smart home, etc.)",
-        // service1Price: "Starting at $40/visit", // Handled by innerHTML map
         service2Title: "Small Business IT Solutions",
         service2Desc: "Workstation setup, user & email management, backups, cloud migrations, and secure remote access.",
         service2Item1: "Ongoing PC/server maintenance",
@@ -364,40 +367,37 @@
         service2Item3: "On-prem & cloud backup solutions",
         service2Item4: "VPN & secure remote workflows",
         service2Item5: "Email and identity access management",
-        // service2Price: "Plans from $150/month", // Handled by innerHTML map
         service3Title: "Competitive Tech Consulting",
         service3Desc: "Skip overpriced MSPs. I help you understand what you really need—no upselling, no fluff.",
         service3Item1: "New office tech planning",
         service3Item2: "Security and backup audits",
         service3Item3: "Cost-cutting strategies on cloud/IT tools",
         service3Item4: "Small office server optimization",
-        // service3Price: "Consults from $65/hour", // Handled by innerHTML map
         service4Title: "Server Health Checks & Tune-Ups",
         service4Desc: "Many providers overcharge for simple server work. I offer honest, affordable checkups.",
         service4Item1: "Windows Server updates & patching",
         service4Item2: "Disk space, services & performance review",
         service4Item3: "Backup validation & storage health",
         service4Item4: "Uptime monitoring setup",
-        // service4Price: "Basic checkups from $60/server", // Handled by innerHTML map
         service5Title: "Data Backup & Recovery",
         service5Desc: "Accidentally deleted a file? Computer won’t start? I’ve helped many recover data successfully.",
         service5Item1: "External drive backup setups",
         service5Item2: "Cloud sync troubleshooting (Google Drive, OneDrive, Dropbox)",
         service5Item3: "Data recovery attempts from dead PCs or damaged drives",
         service5Item4: "Migration to new devices without data loss",
-        // service5Price: "Starts at $45 for basic backup | Recovery from $75", // Handled by innerHTML map
         contactTitle: "Contact Me",
         formNamePlaceholder: "Your Name",
         formEmailPlaceholder: "Your Email",
         formMessagePlaceholder: "How can I help you?",
         formSubmitButton: "Send Message",
+        formErrorMsg: "Oops! Something went wrong while submitting the form. Please try again or contact me directly via WhatsApp or Email.",
         preferMessaging: "Prefer messaging?",
         contactWhatsapp: "WhatsApp: 787-340-0573", 
         contactEmail: "Email: Jconde26r@gmail.com", 
         thankYouMsg: "Thanks for reaching out! I'll get back to you shortly.",
         footerCopyright: "&copy; 2025 Boriken Tech. All rights reserved."
       },
-      es: { // PUERTO RICAN SPANISH TRANSLATIONS - PLEASE ENSURE THESE ARE ACCURATE
+      es: { 
         pageTitle: "Boriken Tech | Soluciones de IT en Puerto Rico",
         headerTitle: "Boriken Tech",
         headerSubtitle: "Ayuda Tecnológica Accesible y Soluciones IT para Negocios en Puerto Rico",
@@ -405,7 +405,7 @@
         aboutMeTitle: "Sobre Mí",
         aboutMeP1: "¡Hola! Soy un profesional de IT con base en Puerto Rico y años de experiencia práctica administrando redes, brindando soporte a estaciones de trabajo, recuperando datos y resolviendo problemas tecnológicos cotidianos tanto para hogares como para empresas.",
         aboutMeP2: "Después de años trabajando para compañías que cobran demasiado y envían a otra persona a hacer el trabajo, decidí convertirme en tu línea directa a la ayuda real, sin intermediarios. Boriken Tech es mi misión unipersonal para ofrecer servicio de nivel experto a individuos y pequeñas empresas sin los costos inflados de los grandes MSP. Obtienes precios transparentes, respuesta rápida y un técnico que realmente conoce tu configuración.",
-        learnMore: "Aprende Más",
+        learnMore: "Aprende Más", 
         service1Title: "Soporte Técnico Personal y para el Hogar",
         service1Desc: "Resolución de problemas de laptop/PC, configuración de Wi-Fi, dispositivos inteligentes, impresoras, instalación de software y más.",
         service1Item1: "Optimización de sistemas y solución a PCs lentas",
@@ -413,7 +413,6 @@
         service1Item3: "Instalación y actualización de software",
         service1Item4: "Instalación de drivers y actualizaciones de SO",
         service1Item5: "Configuración de nuevos dispositivos (impresoras, hogar inteligente, etc.)",
-        // service1Price: "Desde $40/visita", // Handled by innerHTML map
         service2Title: "Soluciones IT para Pequeñas Empresas",
         service2Desc: "Configuración de estaciones de trabajo, gestión de usuarios y correo, copias de seguridad, migraciones a la nube y acceso remoto seguro.",
         service2Item1: "Mantenimiento continuo de PC/servidores",
@@ -421,33 +420,30 @@
         service2Item3: "Soluciones de respaldo local y en la nube",
         service2Item4: "VPN y flujos de trabajo remotos seguros",
         service2Item5: "Gestión de correo electrónico y acceso de identidad",
-        // service2Price: "Planes desde $150/mes", // Handled by innerHTML map
         service3Title: "Consultoría Tecnológica Competitiva",
         service3Desc: "Evita MSPs caros. Te ayudo a entender lo que realmente necesitas, sin ventas adicionales ni palabrería.",
         service3Item1: "Planificación tecnológica para nuevas oficinas",
         service3Item2: "Auditorías de seguridad y copias de seguridad",
         service3Item3: "Estrategias de reducción de costos en herramientas de nube/IT",
         service3Item4: "Optimización de servidores para oficinas pequeñas",
-        // service3Price: "Consultas desde $65/hora", // Handled by innerHTML map
         service4Title: "Chequeos y Afinaciones de Servidores",
         service4Desc: "Muchos proveedores cobran de más por trabajo simple de servidor. Ofrezco chequeos honestos y asequibles.",
         service4Item1: "Actualizaciones y parches de Windows Server",
         service4Item2: "Revisión de espacio en disco, servicios y rendimiento",
         service4Item3: "Validación de copias de seguridad y salud del almacenamiento",
         service4Item4: "Configuración de monitoreo de tiempo de actividad",
-        // service4Price: "Chequeos básicos desde $60/servidor", // Handled by innerHTML map
         service5Title: "Respaldo y Recuperación de Datos",
         service5Desc: "¿Borraste un archivo por accidente? ¿La computadora no enciende? He ayudado a muchos a recuperar datos exitosamente.",
         service5Item1: "Configuraciones de respaldo en discos externos",
         service5Item2: "Solución de problemas de sincronización en la nube (Google Drive, OneDrive, Dropbox)",
         service5Item3: "Intentos de recuperación de datos de PCs dañadas o discos duros defectuosos",
         service5Item4: "Migración a nuevos dispositivos sin pérdida de datos",
-        // service5Price: "Desde $45 por respaldo básico | Recuperación desde $75", // Handled by innerHTML map
         contactTitle: "Contáctame",
         formNamePlaceholder: "Tu Nombre",
         formEmailPlaceholder: "Tu Correo Electrónico",
         formMessagePlaceholder: "¿Cómo puedo ayudarte?",
         formSubmitButton: "Enviar Mensaje",
+        formErrorMsg: "¡Ups! Algo salió mal al enviar el formulario. Por favor, inténtalo de nuevo o contáctame directamente por WhatsApp o Correo Electrónico.",
         preferMessaging: "¿Prefieres mensajería?",
         contactWhatsapp: "WhatsApp: 787-340-0573", 
         contactEmail: "Correo: Jconde26r@gmail.com",   
@@ -478,11 +474,9 @@
       document.querySelectorAll('[data-lang-key]').forEach(element => {
         const key = element.getAttribute('data-lang-key');
         
-        // Check if this key is for a price element handled by innerHTML
         if (priceElementsMap[currentLanguage] && priceElementsMap[currentLanguage][key]) {
           element.innerHTML = priceElementsMap[currentLanguage][key];
         } 
-        // For other elements
         else if (translations[currentLanguage] && translations[currentLanguage][key]) {
           const placeholderKey = element.getAttribute('data-lang-placeholder-key');
           if (placeholderKey && (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA')) {
@@ -502,19 +496,81 @@
       applyTranslations();
     }
 
-    function handleSubmit(event) {
-      event.preventDefault();
-      const form = event.target;
-      form.style.display = 'none';
-      document.getElementById('thankYou').style.display = 'block';
-    }
-
     document.addEventListener('DOMContentLoaded', () => {
       const savedLanguage = localStorage.getItem('preferredLanguage');
       if (savedLanguage) {
         currentLanguage = savedLanguage;
       }
-      applyTranslations();
+      applyTranslations(); 
+
+      const contactForm = document.getElementById('contactForm');
+      const thankYouMessage = document.getElementById('thankYou');
+      const formErrorMessage = document.getElementById('formError');
+
+      if (contactForm) {
+        contactForm.addEventListener('submit', function(event) {
+          event.preventDefault(); 
+
+          const formData = new FormData(contactForm);
+          const action = contactForm.getAttribute('action');
+          const submitButton = contactForm.querySelector('button[type="submit"]');
+          let originalButtonText = ""; // Will be set by applyTranslations or default
+          
+          // Get current translated button text
+          const buttonKey = submitButton.getAttribute('data-lang-key');
+          if (translations[currentLanguage] && translations[currentLanguage][buttonKey]) {
+            originalButtonText = translations[currentLanguage][buttonKey];
+          } else {
+            originalButtonText = submitButton.textContent; // Fallback
+          }
+          
+          const sendingTextKey = currentLanguage === 'es' ? translations.es.formSubmitButtonSending || 'Enviando...' : translations.en.formSubmitButtonSending || 'Sending...';
+          // You might want to add 'formSubmitButtonSending' to your translations object for "Sending..."
+          // e.g., translations.en.formSubmitButtonSending = "Sending...";
+          //       translations.es.formSubmitButtonSending = "Enviando...";
+
+          submitButton.textContent = sendingTextKey;
+          submitButton.disabled = true;
+          thankYouMessage.style.display = 'none'; // Hide previous messages
+          formErrorMessage.style.display = 'none';
+
+
+          fetch(action, {
+            method: 'POST',
+            body: formData,
+            headers: {
+              'Accept': 'application/json'
+            }
+          }).then(response => {
+            if (response.ok) {
+              contactForm.style.display = 'none';
+              thankYouMessage.style.display = 'block';
+              formErrorMessage.style.display = 'none'; 
+              contactForm.reset(); 
+            } else {
+              response.json().then(data => { 
+                if (Object.hasOwn(data, 'errors')) {
+                  console.error(data.errors.map(error => error.message).join(", "));
+                } else {
+                  console.error('Form submission failed, but no specific error messages from Formspree.');
+                }
+                formErrorMessage.style.display = 'block'; 
+                thankYouMessage.style.display = 'none';
+              }).catch(() => { // If response is not JSON or other error
+                formErrorMessage.style.display = 'block'; 
+                thankYouMessage.style.display = 'none';
+              });
+            }
+          }).catch(error => {
+            console.error('Error submitting form:', error);
+            formErrorMessage.style.display = 'block'; 
+            thankYouMessage.style.display = 'none';
+          }).finally(() => {
+            submitButton.textContent = originalButtonText;
+            submitButton.disabled = false;
+          });
+        });
+      }
     });
 
   </script>
