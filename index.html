@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Boriken Tech | IT Solutions in Puerto Rico</title>
+  <link rel="icon" href="favicon.ico" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Montserrat', sans-serif;
+      background-color: #f8f9fb;
+      color: #333;
+    }
+
+    header {
+      background-color: #3b1e63;
+      padding: 2rem 1rem;
+      text-align: center;
+      color: white;
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    header p {
+      font-size: 1.2rem;
+    }
+
+    main {
+      padding: 2rem 1rem;
+      max-width: 1000px;
+      margin: 0 auto;
+      background: url('Back_view_optimized.jpg') no-repeat center center;
+      background-size: cover;
+      background-attachment: fixed;
+      background-blend-mode: lighten;
+    }
+
+    .services {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+    }
+
+    .service {
+      background: white;
+      padding: 1.5rem;
+      border-radius: 0.75rem;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+      transition: transform 0.3s ease;
+    }
+
+    .service:hover {
+      transform: translateY(-5px);
+    }
+
+    .service h3 {
+      color: #3b1e63;
+      margin-top: 0;
+    }
+
+    .learn-more {
+      cursor: pointer;
+      color: #3b1e63;
+      font-weight: bold;
+      margin-top: 1rem;
+      display: inline-block;
+    }
+
+    .hidden-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.5s ease;
+    }
+
+    .hidden-content.open {
+      max-height: 300px;
+    }
+
+    .about {
+      background: white;
+      padding: 2rem;
+      border-radius: 0.75rem;
+      margin-bottom: 3rem;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .about img {
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid #3b1e63;
+    }
+
+    form {
+      background: white;
+      padding: 1.5rem;
+      border-radius: 0.75rem;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    }
+
+    form h2 {
+      color: #3b1e63;
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      padding: 0.75rem;
+      margin-bottom: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 0.5rem;
+      font-size: 1rem;
+    }
+
+    button {
+      background-color: #3b1e63;
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: 0.5rem;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+
+    .download-pdf {
+      text-align: center;
+      margin-top: 2rem;
+    }
+
+    .download-pdf a {
+      background-color: #3b1e63;
+      color: white;
+      padding: 0.75rem 1.5rem;
+      text-decoration: none;
+      border-radius: 0.5rem;
+      font-weight: bold;
+      display: inline-block;
+    }
+
+    .contact-options {
+      margin-top: 1rem;
+    }
+
+    .contact-options a {
+      display: inline-block;
+      margin: 0.5rem;
+      color: #3b1e63;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .thank-you-message {
+      display: none;
+      background-color: #d4edda;
+      color: #155724;
+      padding: 1rem;
+      border-radius: 0.5rem;
+      margin-top: 1rem;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1.5rem;
+      background: #eee;
+      margin-top: 3rem;
+    }
+  </style>
+  <script>
+    function handleSubmit(event) {
+      event.preventDefault();
+      const form = event.target;
+      form.style.display = 'none';
+      document.getElementById('thankYou').style.display = 'block';
+    }
+
+    function toggleLearnMore(id) {
+      const el = document.getElementById(id);
+      el.classList.toggle('open');
+    }
+  </script>
+</head>
+
+<body>
+  <header>
+    <img src="favicon-128x128.png" alt="Boriken Tech logo" width="64" height="64" />
+    <h1>Boriken Tech</h1>
+    <p>Affordable Tech Help & Business IT Solutions in Puerto Rico</p>
+  </header>
+
+  <main>
+    <section class="about">
+      <img src="AR309136_optimized.jpg" alt="Owner Photo" />
+      <div>
+        <h2>About Me</h2>
+        <p>I’m a seasoned IT professional who has worked across various industries providing hands-on support and strategic IT services. With experience in everything from PC repair and virus removal to server checkups, backup recovery, and small business infrastructure setup, I bring the value and efficiency of a full IT team — without the middleman. Boriken Tech is my way of making affordable, no-nonsense tech support accessible in Puerto Rico.</p>
+      </div>
+    </section>
+
+    <section class="services">
+      <div class="service">
+        <h3>Home & Personal Tech Support</h3>
+        <p>Troubleshooting for your everyday devices — PCs, laptops, smart TVs, printers, networks.</p>
+        <span class="learn-more" onclick="toggleLearnMore('learn1')">Learn More</span>
+        <div class="hidden-content" id="learn1">
+          <p>Includes PC tune-ups, software installs, antivirus scans, updates, and help with slow systems or pop-ups.</p>
+        </div>
+        <p><strong>Starting at $40/visit</strong></p>
+      </div>
+
+      <div class="service">
+        <h3>Small Business IT Solutions</h3>
+        <p>Business-grade help including workstation prep, user/email setup, backups, and cloud services.</p>
+        <span class="learn-more" onclick="toggleLearnMore('learn2')">Learn More</span>
+        <div class="hidden-content" id="learn2">
+          <p>Includes on-site/off-site support, device deployments, password & email access control, basic networking, and cloud platform migrations.</p>
+        </div>
+        <p><strong>Plans from $150/month</strong></p>
+      </div>
+
+      <div class="service">
+        <h3>Server Health Checks</h3>
+        <p>Why pay a premium for a checkup? I treat small servers like high-performance PCs — and service them affordably.</p>
+        <span class="learn-more" onclick="toggleLearnMore('learn3')">Learn More</span>
+        <div class="hidden-content" id="learn3">
+          <p>Services include log inspections, drive and performance health, patching, remote access setup, and simple backup verifications.</p>
+        </div>
+        <p><strong>Starting at $75</strong></p>
+      </div>
+
+      <div class="service">
+        <h3>Data Backups & Recovery</h3>
+        <p>Whether you're planning for safety or recovering after a scare — I can help.</p>
+        <p>Backups to external drives, network shares, or the cloud. Recovery from drives that aren’t physically damaged.</p>
+        <p><strong>From $60/session</strong></p>
+      </div>
+    </section>
+
+    <div class="download-pdf">
+      <a href="BorikenTech_Services.pdf" download>📄 Download Service Brochure (PDF)</a>
+    </div>
+
+    <section>
+      <form name="contact" method="POST" data-netlify="true" onsubmit="handleSubmit(event)">
+        <h2>Contact Me</h2>
+        <input type="text" name="name" placeholder="Your Name" required />
+        <input type="email" name="email" placeholder="Your Email" required />
+        <textarea name="message" rows="5" placeholder="How can I help you?" required></textarea>
+        <button type="submit">Send Message</button>
+        <div class="contact-options">
+          <p>Prefer messaging?</p>
+          <a href="https://wa.me/17873400573" target="_blank">WhatsApp: 787-340-0573</a>
+          <a href="mailto:Jconde26r@gmail.com">Email: Jconde26r@gmail.com</a>
+        </div>
+      </form>
+      <div id="thankYou" class="thank-you-message">
+        <p>Thanks for reaching out! I'll get back to you shortly.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Boriken Tech. All rights reserved.</p>
+  </footer>
+</body>
+
+</html>
