@@ -42,22 +42,21 @@
       font-size: 1.2rem;
     }
 
-    /* --- MODIFIED CSS FOR THE BUTTON --- */
     .language-toggle {
       position: absolute;
       top: 1rem;
       right: 1rem;
       background: white;
       border: none;
-      border-radius: 50%; /* Make it circular */
-      padding: 0.5rem;   /* Adjust padding for icon */
+      border-radius: 50%;
+      padding: 0.5rem;
       cursor: pointer;
-      display: flex;     /* Use flexbox for centering */
+      display: flex;
       align-items: center;
       justify-content: center;
-      width: 44px;       /* Set a fixed width */
-      height: 44px;      /* Set a fixed height */
-      box-shadow: 0 2px 4px rgba(0,0,0,0.2); /* Optional: add a subtle shadow */
+      width: 44px;
+      height: 44px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
       transition: transform 0.2s ease;
     }
     
@@ -66,11 +65,11 @@
     }
 
     .language-toggle img {
-        width: 28px;       /* Size of the flag icon */
-        height: auto;      /* Maintain aspect ratio */
+        width: 28px;
+        height: auto;
         display: block;
+        border-radius: 4px; /* Optional: slightly round the corners of the flag itself */
     }
-    /* --- END OF MODIFIED CSS --- */
 
     main {
       padding: 2rem 1rem;
@@ -78,14 +77,14 @@
       margin: 0 auto;
     }
 
-    .services { /* This is for the grid of service cards */
+    .services {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
       gap: 1.5rem;
       margin-bottom: 3rem;
     }
 
-    .service { /* General styling for individual cards including the original About Me */
+    .service {
       background: var(--card-bg-light);
       padding: 1.5rem;
       border-radius: 0.75rem;
@@ -216,18 +215,18 @@
       font-weight: bold;
     }
 
-    .thank-you-message { /* Used for both success and error messages, specific styling below */
+    .thank-you-message {
       display: none;
       padding: 1rem;
       border-radius: 0.5rem;
       margin-top: 1rem;
       text-align: center;
     }
-    #thankYou { /* Success message specific */
+    #thankYou {
         background-color: #d4edda;
         color: #155724;
     }
-    #formError { /* Error message specific */
+    #formError {
         background-color: #f8d7da;
         color: #721c24;
     }
@@ -243,7 +242,7 @@
     <button class="language-toggle" onclick="toggleLanguage()" id="languageToggleButton" aria-label="Toggle Language">
         <img id="language-icon" src="" alt="Toggle Language Icon" />
     </button>
-    </header>
+  </header>
 
   <main>
     <section class="service" id="about-me-section" style="margin-bottom: 2rem;">
@@ -361,9 +360,13 @@
     // --- LANGUAGE TOGGLE SCRIPT (MODIFIED) ---
     let currentLanguage = 'en';
 
-    // Base64 encoded SVGs for the flag icons to avoid extra file downloads
-    const prFlagIcon = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAwIDUwMCI+PHJlY3Qgd2lkdGg9IjEwMDAiIGhlaWdodD0iNTAwIiBmaWxsPSIjRkZGIi8+PHJlY3Qgd2lkdGg9IjEwMDAiIGhlaWdodD0iMTAwIiBmaWxsPSIjZWQwYzI4Ii8+PHJlY3Qgd2lkdGg9IjEwMDAiIGhlaWdodD0iMTAwIiB5PSIyMDAiIGZpbGw9IiNlZDBjMjgiLz48cmVjdCB3aWR0aD0iMTAwMCIgaGVpZ2h0PSIxMDAiIHk9IjQwMCIgZmlsbD0iI2VkMGMyOCIvPjxwb2x5Z29uIHBvaW50cz0iMCwwIDAsNTAwIDQzMywyNTAiIGZpbGw9IiMwMDVkYWIiLz48cG9seWdvbiBwb2ludHM9IjE3MywzMjUuOCA4MS4yLDMzNS44IDEyNC45LDI1OS4zIDgxLjIsMTgyLjggMTczLDE5Mi44IDE5OS4zLDEyOS44IDIyNS42LDE5Mi44IDMxNy41LDE4Mi44IDI3My44LDI1OS4zIDMxNy41LDMzNS44IDIyNS42LDMyNS44IDE5OS4zLDM4OC44IiBmaWxsPSIjRkZGIi8+PC9zdmc+';
-    const usFlagIcon = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA3ODAgNDY4Ij48ZyBmaWxsLXJ1bGU9ImV2ZW5vZGQiIHN0cm9rZS13aWR0aD0iMS4yNSI+PHBhdGggZmlsbD0iI2JmMDYzNSIgZD0iTTAgMGg3ODB2NDY4SDB6Ii8+PHBhdGggZmlsbD0iI2ZmZiIgZD0iTTAgNzJoNzgwVjU0SDB6bTAgNzJoNzgwVjEyNkgwem0wIDcyaDc4MFYxOTlIMHptMCA3MmE0NiA0NiAwIDAxMC0xLjQ2Nmg3ODB2LTU0SDB6bTAgNzJoNzgwdi01NEgwek0wIDQxNGg3ODB2LTU0SDB6Ii8+PHBhdGggZmlsbD0iIzAwMjE2NSIgZD0iTTAgMGgzMTJ2MjcwSDB6Ii8+PHBhdGggZmlsbD0iI2ZmZiIgZD0iTTMxLjIgMTIuOTZsNi4yODQgMTkuMzI2aDIwLjMyOGwtMTYuNDQgMTIuNDE4IDYuMjg0IDE5LjMyOEwzMS4yIDUxLjggMTQuNzYgNjQuMDI4bC0xNi40NC0xMS45MSAyMC4zMjgtMTIuNDE4ek05My42IDEyLjk2bDYuMjg0IDE5LjMyNmgxMC4xNjRsLTI2LjYwNCAxMi40MiA2LjI4NCAxOS4zMjgtMTYuNDQtMTIuNDE4IDEwLjE2NCAxMi40MTggNi4yODQgMTkuMzI4LTE2LjQ0LTEyLjQxOGwxMC4xNjQgMTIuNDE4IDIwLjMyOC0xMi40MTh6TTE1NiAxMi45NmwtMTAuMTY0IDE5LjMyNmgyMC4zMjhsLTE2LjQ0IDEyLjQxOCA2LjI4NCAxOS4zMjhMMTU2IDUxLjggMTM5LjU2IDY0LjAyOGwtMTYuNDQtMTEuOTEgMjAuMzI4LTEyLjQxOHpNMjE4LjQgMTIuOTZsLTEwLjE2NCAxOS4zMjZoMzAuNDkybC0yNi42MDQgMTEuOTEgNi4yODQgMTkuMzI4TDIxOC40IDUxLjggMjAyIDY0LjAyOGwtMTYuNDQtMTEuOTEgMjAuMzI4LTEyLjQxOHpNMjgwLjggMTIuOTZsLTEwLjE2NCAxOS4zMjZoMzAuNDkybC0yNi42MDQgMTEuOTEgNi4yODQgMTkuMzI4TDI4MC44IDUxLjggMjY0LjM2IDY0LjAyOGwtMTYuNDQtMTEuOTEgMjAuMzI4LTEyLjQxOHpNNjIuNCAzOC44OGwtMTAuMTY0IDE5LjMyNmgyMC4zMjhsLTE2LjQ0IDEyLjQyIDYuMjg0IDE5LjMyOEw2Mi40IDc3LjQ4IDQ2IDkwLjAyOGwtMTYuNDQtMTEuOTEgMjAuMzI4LTEyLjE5OHpNMTI0LjggMzguODhsLTIuMDMyIDE5LjMyNmgyMi4zNjRsLTE4LjQ3MiAxMi40MiA4LjMyIDE5LjMyOC0xNi40NC0xMi40MThsNi4yODQgMTIuNDE4IDguMzIgMTkuMzI4LTE2LjQ0LTEyLjQxOCAxMC4xNjQgMTIuNDE4IDIwLjMyOC0xMi4xOTh6TTE4Ny4yIDM4Ljg4bC0yLjAzMiAxOS4zMjZoMjIuMzY0bC0xOC40NzIgMTIuNDIgOC4zMiAxOS4zMjgtMTYuNDQtMTIuMTk4IDYuMjg0IDEyLjE5OCA4LjMyIDE5LjMyOC0xNi40NC0xMi4xOTggMTAuMTY0IDEyLjE5OCAyMC4zMjgtMTIuMTk4ek0yNDkuNiAzOC44OGwtMi4wMzIgMTkuMzI2aDIyLjM2NGwtMTguNDcyIDEyLjQyIDguMzIgMTkuMzI4LTE2LjQ0LTEyLjE5OCA2LjI4NCAxMi4xOTggOC4zMiAxOS4zMjgtMTYuNDQtMTIuMTk4IDEwLjE2NCAxMi4xOTggMjAuMzI4LTEyLjE5OHpNMzEuMiA2NC44bC0yLjAzMiAxOS4zMjZoMjIuMzY0bC0xOC40NzIgMTIuNDIgOC4zMiAxOS4zMjgtMTYuNDQtMTIuMTk4IDYuMjg0IDEyLjE5OCA4LjMyIDE5LjMyOC0xNi40NC0xMi4xOTggMTAuMTY0IDEyLjE5OCAyMC4zMjgtMTIuMTk4ek05My42IDY0LjhsLTIuMDMyIDE5LjMyNmgyMi4zNjRsLTE4LjQ3MiAxMi40MiA4LjMyIDE5LjMyOC0xNi40NC0xMi4xOTggNi4yODQgMTIuMTk4IDguMzIgMTkuMzI4LTE2LjQ0LTEyLjE5OCAxMC4xNjQgMTIuMTk4IDIwLjMyOC0xMi4xOTh6TTE1NiA2NC44bC0yLjAzMiAxOS4zMjZoMjIuMzY0bC0xOC40NzIgMTIuNDIgOC4zMiAxOS4zMjgtMTYuNDQtMTIuMTk4IDYuMjg0IDEyLjE5OCA4LjMyIDE5LjMyOC0xNi40NC0xMi4xOTggMTAuMTY0IDEyLjE5OCAyMC4zMjgtMTIuMTk4ek0yMTguNCA2NC44bC0yLjAzMiAxOS4zMjZoMjIuMzY0bC0xOC40NzIgMTIuNDIgOC4zMiAxOS4zMjgtMTYuNDQtMTIuMTk4IDYuMjg0IDEyLjE5OCA4LjMyIDE5LjMyOC0xNi40NC0xMi4xOTggMTAuMTY0IDEyLjE5OCAyMC4zMjgtMTIuMTk4ek0yODAuOCA2NC44bC0yLjAzMiAxOS4zMjZoMjIuMzY0bC0xOC40NzIgMTIuNDIgOC4zMiAxOS4zMjgtMTYuNDQtMTIuMTk4IDYuMjg0IDEyLjE5OCA4LjMyIDE5LjMyOC0xNi40NC0xMi4xOTggMTAuMTY0IDEyLjE5OCAyMC4zMjgtMTIuMTk4ek0zMS4yIDExMC40bC0yLjAzMiAxOS4zMjZoMjIuMzY0bC0xOC40NzIgMTIuNDIgOC4zMiAxOS4zMjgtMTYuNDQtMTIuMTk4IDYuMjg0IDEyLjE5OCA4LjMyIDE5LjMyOC0xNi40NC0xMi4xOTggMTAuMTY0IDEyLjE5OCAyMC4zMjgtMTIuMTk4ek05My42IDExMC40bC0yLjAzMiAxOS4zMjZoMjIuMzY0bC0xOC40NzIgMTIuNDIgOC4zMiAxOS4zMjgtMTYuNDQtMTIuMTk4IDYuMjg0IDEyLjE5OCA4LjMyIDE5LjMyOC0xNi40NC0xMi4xOTggMTAuMTY0IDEyLjE5OCAyMC4zMjgtMTIuMTk4ek0xNTYgMTEwLjRsLTIuMDMyIDE5LjMyNmgyMi4zNjRsLTE4LjQ3MiAxMi40MiA4LjMyIDE5LjMyOC0xNi40NC0xMi4xOTggNi4yODQgMTIuMTk4IDguMzIgMTkuMzI4LTE2LjQ0LTEyLjE5OCAxMC4xNjQgMTIuMTk4IDIwLjMyOC0xMi4xOTh6TTIxOC40IDExMC40bC0yLjAzMiAxOS4zMjZoMjIuMzY0bC0xOC40NzIgMTIuNDIgOC4zMiAxOS4zMjgtMTYuNDQtMTIuMTk4IDYuMjg0IDEyLjE5OCA4LjMyIDE5LjMyOC0xNi40NC0xMi4xOTggMTAuMTY0IDEyLjE5OCAyMC4zMjgtMTIuMTk4ek0yODAuOCAxMTAuNGwtMi4wMzIgMTkuMzI2aDIyLjM2NGwtMTguNDcyIDEyLjQyIDguMzIgMTkuMzI4LTE2LjQ0LTEyLjE5OCA2LjI4NCAxMi4xOTggOC4zMiAxOS4zMjgtMTYuNDQtMTIuMTk4IDEwLjE2NCAxMi4xOTggMjAuMzI4LTEyLjE5OHpNNjIuNCAxMzYuMjhsLTIuMDMyIDE5LjMyNmgyMi4zNjRsLTE4LjQ3MiAxMi40MiA4LjMyIDE5LjMyOC0xNi40NC0xMi4xOTggNi4yODQgMTIuMTk4IDguMzIgMTkuMzI4LTE2LjQ0LTEyLjE5OCAxMC4xNjQgMTIuMTk4IDIwLjMyOC0xMi4xOTh6TTEyNC44IDEzNi4yOGwtMi4wMzIgMTkuMzI2aDIyLjM2NGwtMTguNDcyIDEyLjQyIDguMzIgMTkuMzI4LTE2LjQ0LTEyLjE5OCA2LjI4NCAxMi4xOTggOC4zMiAxOS4zMjgtMTYuNDQtMTIuMTk4IDEwLjE2NCAxMi4xOTggMjAuMzI4LTEyLjE5OHpNMTg3LjIgMTM2LjI4bC0yLjAzMiAxOS4zMjZoMjIuMzY0bC0xOC40NzIgMTIuNDIgOC4zMiAxOS4zMjgtMTYuNDQtMTIuMTk4IDYuMjg0IDEyLjE5OCA4LjMyIDE5LjMyOC0xNi40NC0xMi4xOTggMTAuMTY0IDEyLjE5OCAyMC4zMjgtMTIuMTk4ek0yNDkuNiAxMzYuMjhsLTIuMDMyIDE5LjMyNmgyMi4zNjRsLTE4LjQ3MiAxMi40MiA4LjMyIDE5LjMyOC0xNi40NC0xMi4xOTggNi4yODQgMTIuMTk4IDguMzIgMTkuMzI4LTE2LjQ0LTEyLjE5OCAxMC4xNjQgMTIuMTk4IDIwLjMyOC0xMi4xOTh6TzMxLjIgMTgzLjI0bC0yLjAzMiAxOS4zMjZoMjIuMzY0bC0xOC40NzIgMTIuNDIgOC4zMiAxOS4zMjgtMTYuNDQtMTIuMTk4IDYuMjg0IDEyLjE5OCA4LjMyIDE5LjMyOC0xNi40NC0xMi4xOTggMTAuMTY0IDEyLjE5OCAyMC4zMjgtMTIuMTk4ek05My42IDE4My4yNGwtMi4wMzIgMTkuMzI2aDIyLjM2NGwtMTguNDcyIDEyLjQyIDguMzIgMTkuMzI4LTE2LjQ0LTEyLjE5OCA2LjI4NCAxMi4xOTggOC4zMiAxOS4zMjgtMTYuNDQtMTIuMTk4IDEwLjE2NCAxMi4xOTggMjAuMzI4LTEyLjE5OHpNOTU2IDE4My4yNGwtMi4wMzIgMTkuMzI2aDIyLjM2NGwtMTguNDcyIDEyLjQyIDguMzIgMTkuMzI4LTE2LjQ0LTEyLjE5OCA2LjI4NCAxMi4xOTggOC4zMiAxOS4zMjgtMTYuNDQtMTIuMTk4IDEwLjE2NCAxMi4xOTggMjAuMzI4LTEyLjE5OHpNMjE4LjQgMTgzLjI0bC0yLjAzMiAxOS4zMjZoMjIuMzY0bC0xOC40NzIgMTIuNDIgOC4zMiAxOS4zMjgtMTYuNDQtMTIuMTk4IDYuMjg0IDEyLjE5OCA4LjMyIDE5LjMyOC0xNi40NC0xMi4xOTggMTAuMTY0IDEyLjE5OCAyMC4zMjgtMTIuMTk4ek0yODAuOCAxODMuMjRsLTIuMDMyIDE5LjMyNmgyMi4zNjRsLTE4LjQ3MiAxMi4yIDguMzIgMTkuMy0xNi40NC0xMi4yIDYuMjg0IDEyLjIgOC4zMiAxOS4zLTE2LjQ0LTEyLjIgMTAuMTY0IDEyLjIgMjAuMzI4LTEyLjJ6TTYyLjQgMjA5LjA4bC0yLjAzMiAxOS4zMjZoMjIuMzY0bC0xOC40NzIgMTIuMiA4LjMyIDE5LjMtMTYuNDQtMTIuMiA2LjI4NCAxMi4yIDguMzIgMTkuMy0xNi40NC0xMi4yIDEwLjE2NCAxMi4yIDIwLjMyOC0xMi4yek0xMjQuOCAyMDkuMDhsLTIuMDMyIDE5LjMyNmgyMi4zNjRsLTE4LjQ3MiAxMi4yIDguMzIgMTkuMy0xNi40NC0xMi4yIDYuMjg0IDEyLjIgOC4zMiAxOS4zLTE2LjQ0LTEyLjIgMTAuMTY0IDEyLjIgMjAuMzI4LTEyLjJ6TTE4Ny4yIDIwOS4wOGwtMi4wMzIgMTkuMzI2aDIyLjM2NGwtMTguNDcyIDEyLjIgOC4zMiAxOS4zLTE2LjQ0LTEyLjIgNi4yODQgMTIuMiA4LjMyIDE5LjMtMTYuNDQtMTIuMiAxMC4xNjQgMTIuMiAyMC4zMjgtMTIuMnpNMjQ5LjYgMjA5LjA4bC0yLjAzMiAxOS4zMjZoMjIuMzY0bC0xOC40NzIgMTIuMiA4LjMyIDE5LjMtMTYuNDQtMTIuMiA2LjI4NCAxMi4yIDguMzIgMTkuMy0xNi40NC0xMi4yIDEwLjE2NCAxMi4yIDIwLjMyOC0xMi4yeiIvPjwvZz48L3ZnPg==';
+    // --- UPDATED ---
+    // These are now paths to your image files.
+    // Make sure you have a folder named 'images' next to your HTML file
+    // and that these two files are inside it.
+    const prFlagIcon = 'images/PR-android-chrome-192x192.png';
+    const usFlagIcon = 'images/US-android-chrome-192x192.png';
+    // --- END OF UPDATE ---
 
     const translations = {
       en: {
@@ -494,13 +497,10 @@
       const langIcon = document.getElementById('language-icon');
       const langButton = document.getElementById('languageToggleButton');
 
-      // Update the language toggle button icon and aria-label
       if (currentLanguage === 'en') {
-        // Page is English, button shows PR flag to offer a switch to Spanish
         langIcon.src = prFlagIcon;
         langButton.setAttribute('aria-label', 'Switch to Spanish');
       } else {
-        // Page is Spanish, button shows US flag to offer a switch to English
         langIcon.src = usFlagIcon;
         langButton.setAttribute('aria-label', 'Switch to English');
       }
@@ -518,7 +518,6 @@
                  element.placeholder = translations[currentLanguage][placeholderKey];
             }
           } else {
-            // Handle the title tag separately
             if(key === 'pageTitle') {
                 document.title = translations[currentLanguage][key];
             } else {
@@ -605,7 +604,6 @@
         });
       }
     });
-
   </script>
 </body>
 </html>
