@@ -13,7 +13,7 @@
       --text-dark: #333333;
       --card-bg-light: white;
       --shadow-light: rgba(0, 0, 0, 0.05);
-      --footer-bg: #eee; 
+      --footer-bg: #eee;
     }
 
     body {
@@ -42,18 +42,35 @@
       font-size: 1.2rem;
     }
 
+    /* --- MODIFIED CSS FOR THE BUTTON --- */
     .language-toggle {
       position: absolute;
       top: 1rem;
       right: 1rem;
       background: white;
-      color: var(--primary-color);
       border: none;
-      border-radius: 1rem;
-      padding: 0.5rem 1rem;
+      border-radius: 50%; /* Make it circular */
+      padding: 0.5rem;   /* Adjust padding for icon */
       cursor: pointer;
-      font-weight: bold;
+      display: flex;     /* Use flexbox for centering */
+      align-items: center;
+      justify-content: center;
+      width: 44px;       /* Set a fixed width */
+      height: 44px;      /* Set a fixed height */
+      box-shadow: 0 2px 4px rgba(0,0,0,0.2); /* Optional: add a subtle shadow */
+      transition: transform 0.2s ease;
     }
+    
+    .language-toggle:hover {
+        transform: scale(1.1);
+    }
+
+    .language-toggle img {
+        width: 28px;       /* Size of the flag icon */
+        height: auto;      /* Maintain aspect ratio */
+        display: block;
+    }
+    /* --- END OF MODIFIED CSS --- */
 
     main {
       padding: 2rem 1rem;
@@ -74,8 +91,8 @@
       border-radius: 0.75rem;
       box-shadow: 0 4px 8px var(--shadow-light);
       transition: transform 0.2s ease, background 0.3s ease;
-      position: relative; 
-      z-index: 1; 
+      position: relative;
+      z-index: 1;
     }
 
     .service:hover {
@@ -83,9 +100,9 @@
     }
 
     #about-me-section {
-      background-color: transparent !important; 
-      position: relative; 
-      z-index: 0; 
+      background-color: transparent !important;
+      position: relative;
+      z-index: 0;
     }
 
     #about-me-section::before {
@@ -95,12 +112,12 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background-image: url('images/Back view.jpg'); 
+      background-image: url('images/Back view.jpg');
       background-size: cover;
       background-position: center;
-      opacity: 0.15; 
-      z-index: -1; 
-      border-radius: 0.75rem; 
+      opacity: 0.15;
+      z-index: -1;
+      border-radius: 0.75rem;
     }
 
     .service h3 {
@@ -142,7 +159,7 @@
       border-radius: 0.75rem;
       box-shadow: 0 4px 8px var(--shadow-light);
       transition: background 0.3s ease;
-      position: relative; 
+      position: relative;
       z-index: 1;
     }
 
@@ -153,8 +170,8 @@
 
     input,
     textarea {
-      width: 100%; 
-      box-sizing: border-box; 
+      width: 100%;
+      box-sizing: border-box;
       padding: 0.75rem;
       margin-bottom: 1rem;
       border: 1px solid #ccc;
@@ -162,7 +179,7 @@
       font-size: 1rem;
     }
 
-    button { 
+    button {
       background-color: var(--primary-color);
       color: white;
       padding: 0.75rem 1.5rem;
@@ -172,13 +189,13 @@
       cursor: pointer;
     }
     
-    form button[type="submit"] { 
+    form button[type="submit"] {
       /* Add specific styles here if different from language-toggle button */
     }
 
     footer {
       text-align: center;
-      padding: 1.5rem; 
+      padding: 1.5rem;
       background: var(--footer-bg);
       margin-top: 3rem;
     }
@@ -188,12 +205,12 @@
     }
     
     .contact-options p {
-      margin-bottom: 0.5rem; 
+      margin-bottom: 0.5rem;
     }
 
     .contact-options a {
       display: inline-block;
-      margin: 0.25rem 0.5rem 0.25rem 0; 
+      margin: 0.25rem 0.5rem 0.25rem 0;
       color: var(--primary-color);
       text-decoration: none;
       font-weight: bold;
@@ -222,10 +239,11 @@
     <img src="favicon-128x128.png" alt="Boriken Tech logo" width="64" height="64" />
     <h1 data-lang-key="headerTitle">Boriken Tech</h1>
     <p data-lang-key="headerSubtitle">Affordable Tech Help & Business IT Solutions in Puerto Rico</p>
-    <button class="language-toggle" onclick="toggleLanguage()" id="languageToggleButton" data-lang-key="toggleLanguageButton">
-      Toggle Spanish 🇵🇷
+    
+    <button class="language-toggle" onclick="toggleLanguage()" id="languageToggleButton" aria-label="Toggle Language">
+        <img id="language-icon" src="" alt="Toggle Language Icon" />
     </button>
-  </header>
+    </header>
 
   <main>
     <section class="service" id="about-me-section" style="margin-bottom: 2rem;">
@@ -329,7 +347,7 @@
       <div id="thankYou" class="thank-you-message">
         <p data-lang-key="thankYouMsg">Thanks for reaching out! I'll get back to you shortly.</p>
       </div>
-      <div id="formError" class="thank-you-message"> {/* Style adjusted in CSS block */}
+      <div id="formError" class="thank-you-message">
           <p data-lang-key="formErrorMsg">Oops! Something went wrong. Please try again or contact me directly.</p>
       </div>
     </section>
@@ -340,15 +358,18 @@
   </footer>
 
   <script>
-    // --- LANGUAGE TOGGLE SCRIPT ---
-    let currentLanguage = 'en'; 
+    // --- LANGUAGE TOGGLE SCRIPT (MODIFIED) ---
+    let currentLanguage = 'en';
+
+    // Base64 encoded SVGs for the flag icons to avoid extra file downloads
+    const prFlagIcon = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAwIDUwMCI+PHJlY3Qgd2lkdGg9IjEwMDAiIGhlaWdodD0iNTAwIiBmaWxsPSIjRkZGIi8+PHJlY3Qgd2lkdGg9IjEwMDAiIGhlaWdodD0iMTAwIiBmaWxsPSIjZWQwYzI4Ii8+PHJlY3Qgd2lkdGg9IjEwMDAiIGhlaWdodD0iMTAwIiB5PSIyMDAiIGZpbGw9IiNlZDBjMjgiLz48cmVjdCB3aWR0aD0iMTAwMCIgaGVpZ2h0PSIxMDAiIHk9IjQwMCIgZmlsbD0iI2VkMGMyOCIvPjxwb2x5Z29uIHBvaW50cz0iMCwwIDAsNTAwIDQzMywyNTAiIGZpbGw9IiMwMDVkYWIiLz48cG9seWdvbiBwb2ludHM9IjE3MywzMjUuOCA4MS4yLDMzNS44IDEyNC45LDI1OS4zIDgxLjIsMTgyLjggMTczLDE5Mi44IDE5OS4zLDEyOS44IDIyNS42LDE5Mi44IDMxNy41LDE4Mi44IDI3My44LDI1OS4zIDMxNy41LDMzNS44IDIyNS42LDMyNS44IDE5OS4zLDM4OC44IiBmaWxsPSIjRkZGIi8+PC9zdmc+';
+    const usFlagIcon = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA3ODAgNDY4Ij48ZyBmaWxsLXJ1bGU9ImV2ZW5vZGQiIHN0cm9rZS13aWR0aD0iMS4yNSI+PHBhdGggZmlsbD0iI2JmMDYzNSIgZD0iTTAgMGg3ODB2NDY4SDB6Ii8+PHBhdGggZmlsbD0iI2ZmZiIgZD0iTTAgNzJoNzgwVjU0SDB6bTAgNzJoNzgwVjEyNkgwem0wIDcyaDc4MFYxOTlIMHptMCA3MmE0NiA0NiAwIDAxMC0xLjQ2Nmg3ODB2LTU0SDB6bTAgNzJoNzgwdi01NEgwek0wIDQxNGg3ODB2LTU0SDB6Ii8+PHBhdGggZmlsbD0iIzAwMjE2NSIgZD0iTTAgMGgzMTJ2MjcwSDB6Ii8+PHBhdGggZmlsbD0iI2ZmZiIgZD0iTTMxLjIgMTIuOTZsNi4yODQgMTkuMzI2aDIwLjMyOGwtMTYuNDQgMTIuNDE4IDYuMjg0IDE5LjMyOEwzMS4yIDUxLjggMTQuNzYgNjQuMDI4bC0xNi40NC0xMS45MSAyMC4zMjgtMTIuNDE4ek05My42IDEyLjk2bDYuMjg0IDE5LjMyNmgxMC4xNjRsLTI2LjYwNCAxMi40MiA2LjI4NCAxOS4zMjgtMTYuNDQtMTIuNDE4IDEwLjE2NCAxMi40MTggNi4yODQgMTkuMzI4LTE2LjQ0LTEyLjQxOGwxMC4xNjQgMTIuNDE4IDIwLjMyOC0xMi40MTh6TTE1NiAxMi45NmwtMTAuMTY0IDE5LjMyNmgyMC4zMjhsLTE2LjQ0IDEyLjQxOCA2LjI4NCAxOS4zMjhMMTU2IDUxLjggMTM5LjU2IDY0LjAyOGwtMTYuNDQtMTEuOTEgMjAuMzI4LTEyLjQxOHpNMjE4LjQgMTIuOTZsLTEwLjE2NCAxOS4zMjZoMzAuNDkybC0yNi42MDQgMTEuOTEgNi4yODQgMTkuMzI4TDIxOC40IDUxLjggMjAyIDY0LjAyOGwtMTYuNDQtMTEuOTEgMjAuMzI4LTEyLjQxOHpNMjgwLjggMTIuOTZsLTEwLjE2NCAxOS4zMjZoMzAuNDkybC0yNi42MDQgMTEuOTEgNi4yODQgMTkuMzI4TDI4MC44IDUxLjggMjY0LjM2IDY0LjAyOGwtMTYuNDQtMTEuOTEgMjAuMzI4LTEyLjQxOHpNNjIuNCAzOC44OGwtMTAuMTY0IDE5LjMyNmgyMC4zMjhsLTE2LjQ0IDEyLjQyIDYuMjg0IDE5LjMyOEw2Mi40IDc3LjQ4IDQ2IDkwLjAyOGwtMTYuNDQtMTEuOTEgMjAuMzI4LTEyLjE5OHpNMTI0LjggMzguODhsLTIuMDMyIDE5LjMyNmgyMi4zNjRsLTE4LjQ3MiAxMi40MiA4LjMyIDE5LjMyOC0xNi40NC0xMi40MThsNi4yODQgMTIuNDE4IDguMzIgMTkuMzI4LTE2LjQ0LTEyLjQxOCAxMC4xNjQgMTIuNDE4IDIwLjMyOC0xMi4xOTh6TTE4Ny4yIDM4Ljg4bC0yLjAzMiAxOS4zMjZoMjIuMzY0bC0xOC40NzIgMTIuNDIgOC4zMiAxOS4zMjgtMTYuNDQtMTIuMTk4IDYuMjg0IDEyLjE5OCA4LjMyIDE5LjMyOC0xNi40NC0xMi4xOTggMTAuMTY0IDEyLjE5OCAyMC4zMjgtMTIuMTk4ek0yNDkuNiAzOC44OGwtMi4wMzIgMTkuMzI2aDIyLjM2NGwtMTguNDcyIDEyLjQyIDguMzIgMTkuMzI4LTE2LjQ0LTEyLjE5OCA2LjI4NCAxMi4xOTggOC4zMiAxOS4zMjgtMTYuNDQtMTIuMTk4IDEwLjE2NCAxMi4xOTggMjAuMzI4LTEyLjE5OHpNMzEuMiA2NC44bC0yLjAzMiAxOS4zMjZoMjIuMzY0bC0xOC40NzIgMTIuNDIgOC4zMiAxOS4zMjgtMTYuNDQtMTIuMTk4IDYuMjg0IDEyLjE5OCA4LjMyIDE5LjMyOC0xNi40NC0xMi4xOTggMTAuMTY0IDEyLjE5OCAyMC4zMjgtMTIuMTk4ek05My42IDY0LjhsLTIuMDMyIDE5LjMyNmgyMi4zNjRsLTE4LjQ3MiAxMi40MiA4LjMyIDE5LjMyOC0xNi40NC0xMi4xOTggNi4yODQgMTIuMTk4IDguMzIgMTkuMzI4LTE2LjQ0LTEyLjE5OCAxMC4xNjQgMTIuMTk4IDIwLjMyOC0xMi4xOTh6TTE1NiA2NC44bC0yLjAzMiAxOS4zMjZoMjIuMzY0bC0xOC40NzIgMTIuNDIgOC4zMiAxOS4zMjgtMTYuNDQtMTIuMTk4IDYuMjg0IDEyLjE5OCA4LjMyIDE5LjMyOC0xNi40NC0xMi4xOTggMTAuMTY0IDEyLjE5OCAyMC4zMjgtMTIuMTk4ek0yMTguNCA2NC44bC0yLjAzMiAxOS4zMjZoMjIuMzY0bC0xOC40NzIgMTIuNDIgOC4zMiAxOS4zMjgtMTYuNDQtMTIuMTk4IDYuMjg0IDEyLjE5OCA4LjMyIDE5LjMyOC0xNi40NC0xMi4xOTggMTAuMTY0IDEyLjE5OCAyMC4zMjgtMTIuMTk4ek0yODAuOCA2NC44bC0yLjAzMiAxOS4zMjZoMjIuMzY0bC0xOC40NzIgMTIuNDIgOC4zMiAxOS4zMjgtMTYuNDQtMTIuMTk4IDYuMjg0IDEyLjE5OCA4LjMyIDE5LjMyOC0xNi40NC0xMi4xOTggMTAuMTY0IDEyLjE5OCAyMC4zMjgtMTIuMTk4ek0zMS4yIDExMC40bC0yLjAzMiAxOS4zMjZoMjIuMzY0bC0xOC40NzIgMTIuNDIgOC4zMiAxOS4zMjgtMTYuNDQtMTIuMTk4IDYuMjg0IDEyLjE5OCA4LjMyIDE5LjMyOC0xNi40NC0xMi4xOTggMTAuMTY0IDEyLjE5OCAyMC4zMjgtMTIuMTk4ek05My42IDExMC40bC0yLjAzMiAxOS4zMjZoMjIuMzY0bC0xOC40NzIgMTIuNDIgOC4zMiAxOS4zMjgtMTYuNDQtMTIuMTk4IDYuMjg0IDEyLjE5OCA4LjMyIDE5LjMyOC0xNi40NC0xMi4xOTggMTAuMTY0IDEyLjE5OCAyMC4zMjgtMTIuMTk4ek0xNTYgMTEwLjRsLTIuMDMyIDE5LjMyNmgyMi4zNjRsLTE4LjQ3MiAxMi40MiA4LjMyIDE5LjMyOC0xNi40NC0xMi4xOTggNi4yODQgMTIuMTk4IDguMzIgMTkuMzI4LTE2LjQ0LTEyLjE5OCAxMC4xNjQgMTIuMTk4IDIwLjMyOC0xMi4xOTh6TTIxOC40IDExMC40bC0yLjAzMiAxOS4zMjZoMjIuMzY0bC0xOC40NzIgMTIuNDIgOC4zMiAxOS4zMjgtMTYuNDQtMTIuMTk4IDYuMjg0IDEyLjE5OCA4LjMyIDE5LjMyOC0xNi40NC0xMi4xOTggMTAuMTY0IDEyLjE5OCAyMC4zMjgtMTIuMTk4ek0yODAuOCAxMTAuNGwtMi4wMzIgMTkuMzI2aDIyLjM2NGwtMTguNDcyIDEyLjQyIDguMzIgMTkuMzI4LTE2LjQ0LTEyLjE5OCA2LjI4NCAxMi4xOTggOC4zMiAxOS4zMjgtMTYuNDQtMTIuMTk4IDEwLjE2NCAxMi4xOTggMjAuMzI4LTEyLjE5OHpNNjIuNCAxMzYuMjhsLTIuMDMyIDE5LjMyNmgyMi4zNjRsLTE4LjQ3MiAxMi40MiA4LjMyIDE5LjMyOC0xNi40NC0xMi4xOTggNi4yODQgMTIuMTk4IDguMzIgMTkuMzI4LTE2LjQ0LTEyLjE5OCAxMC4xNjQgMTIuMTk4IDIwLjMyOC0xMi4xOTh6TTEyNC44IDEzNi4yOGwtMi4wMzIgMTkuMzI2aDIyLjM2NGwtMTguNDcyIDEyLjQyIDguMzIgMTkuMzI4LTE2LjQ0LTEyLjE5OCA2LjI4NCAxMi4xOTggOC4zMiAxOS4zMjgtMTYuNDQtMTIuMTk4IDEwLjE2NCAxMi4xOTggMjAuMzI4LTEyLjE5OHpNMTg3LjIgMTM2LjI4bC0yLjAzMiAxOS4zMjZoMjIuMzY0bC0xOC40NzIgMTIuNDIgOC4zMiAxOS4zMjgtMTYuNDQtMTIuMTk4IDYuMjg0IDEyLjE5OCA4LjMyIDE5LjMyOC0xNi40NC0xMi4xOTggMTAuMTY0IDEyLjE5OCAyMC4zMjgtMTIuMTk4ek0yNDkuNiAxMzYuMjhsLTIuMDMyIDE5LjMyNmgyMi4zNjRsLTE4LjQ3MiAxMi40MiA4LjMyIDE5LjMyOC0xNi40NC0xMi4xOTggNi4yODQgMTIuMTk4IDguMzIgMTkuMzI4LTE2LjQ0LTEyLjE5OCAxMC4xNjQgMTIuMTk4IDIwLjMyOC0xMi4xOTh6TzMxLjIgMTgzLjI0bC0yLjAzMiAxOS4zMjZoMjIuMzY0bC0xOC40NzIgMTIuNDIgOC4zMiAxOS4zMjgtMTYuNDQtMTIuMTk4IDYuMjg0IDEyLjE5OCA4LjMyIDE5LjMyOC0xNi40NC0xMi4xOTggMTAuMTY0IDEyLjE5OCAyMC4zMjgtMTIuMTk4ek05My42IDE4My4yNGwtMi4wMzIgMTkuMzI2aDIyLjM2NGwtMTguNDcyIDEyLjQyIDguMzIgMTkuMzI4LTE2LjQ0LTEyLjE5OCA2LjI4NCAxMi4xOTggOC4zMiAxOS4zMjgtMTYuNDQtMTIuMTk4IDEwLjE2NCAxMi4xOTggMjAuMzI4LTEyLjE5OHpNOTU2IDE4My4yNGwtMi4wMzIgMTkuMzI2aDIyLjM2NGwtMTguNDcyIDEyLjQyIDguMzIgMTkuMzI4LTE2LjQ0LTEyLjE5OCA2LjI4NCAxMi4xOTggOC4zMiAxOS4zMjgtMTYuNDQtMTIuMTk4IDEwLjE2NCAxMi4xOTggMjAuMzI4LTEyLjE5OHpNMjE4LjQgMTgzLjI0bC0yLjAzMiAxOS4zMjZoMjIuMzY0bC0xOC40NzIgMTIuNDIgOC4zMiAxOS4zMjgtMTYuNDQtMTIuMTk4IDYuMjg0IDEyLjE5OCA4LjMyIDE5LjMyOC0xNi40NC0xMi4xOTggMTAuMTY0IDEyLjE5OCAyMC4zMjgtMTIuMTk4ek0yODAuOCAxODMuMjRsLTIuMDMyIDE5LjMyNmgyMi4zNjRsLTE4LjQ3MiAxMi4yIDguMzIgMTkuMy0xNi40NC0xMi4yIDYuMjg0IDEyLjIgOC4zMiAxOS4zLTE2LjQ0LTEyLjIgMTAuMTY0IDEyLjIgMjAuMzI4LTEyLjJ6TTYyLjQgMjA5LjA4bC0yLjAzMiAxOS4zMjZoMjIuMzY0bC0xOC40NzIgMTIuMiA4LjMyIDE5LjMtMTYuNDQtMTIuMiA2LjI4NCAxMi4yIDguMzIgMTkuMy0xNi40NC0xMi4yIDEwLjE2NCAxMi4yIDIwLjMyOC0xMi4yek0xMjQuOCAyMDkuMDhsLTIuMDMyIDE5LjMyNmgyMi4zNjRsLTE4LjQ3MiAxMi4yIDguMzIgMTkuMy0xNi40NC0xMi4yIDYuMjg0IDEyLjIgOC4zMiAxOS4zLTE2LjQ0LTEyLjIgMTAuMTY0IDEyLjIgMjAuMzI4LTEyLjJ6TTE4Ny4yIDIwOS4wOGwtMi4wMzIgMTkuMzI2aDIyLjM2NGwtMTguNDcyIDEyLjIgOC4zMiAxOS4zLTE2LjQ0LTEyLjIgNi4yODQgMTIuMiA4LjMyIDE5LjMtMTYuNDQtMTIuMiAxMC4xNjQgMTIuMiAyMC4zMjgtMTIuMnpNMjQ5LjYgMjA5LjA4bC0yLjAzMiAxOS4zMjZoMjIuMzY0bC0xOC40NzIgMTIuMiA4LjMyIDE5LjMtMTYuNDQtMTIuMiA2LjI4NCAxMi4yIDguMzIgMTkuMy0xNi40NC0xMi4yIDEwLjE2NCAxMi4yIDIwLjMyOC0xMi4yeiIvPjwvZz48L3ZnPg==';
 
     const translations = {
       en: {
         pageTitle: "Boriken Tech | IT Solutions in Puerto Rico",
         headerTitle: "Boriken Tech",
         headerSubtitle: "Affordable Tech Help & Business IT Solutions in Puerto Rico",
-        toggleLanguageButton: "Toggle Spanish 🇵🇷",
         aboutMeTitle: "About Me",
         aboutMeP1: "Hello! I'm a seasoned IT professional based in Puerto Rico with years of hands-on experience managing networks, supporting workstations, recovering data, and solving everyday tech headaches for both homes and businesses.",
         aboutMeP2: "After years working for companies that charge too much and send someone else to do the job, I decided to become your direct line to real help—no middleman. Boriken Tech is my one-man mission to bring expert-level service to individuals and small businesses without the bloated costs of large MSPs. You get transparent pricing, quick response, and a tech guy who actually knows your setup.",
@@ -392,20 +413,19 @@
         formSubmitButton: "Send Message",
         formErrorMsg: "Oops! Something went wrong while submitting the form. Please try again or contact me directly via WhatsApp or Email.",
         preferMessaging: "Prefer messaging?",
-        contactWhatsapp: "WhatsApp: 787-340-0573", 
-        contactEmail: "Email: Jconde26r@gmail.com", 
+        contactWhatsapp: "WhatsApp: 787-340-0573",
+        contactEmail: "Email: Jconde26r@gmail.com",
         thankYouMsg: "Thanks for reaching out! I'll get back to you shortly.",
         footerCopyright: "&copy; 2025 Boriken Tech. All rights reserved."
       },
-      es: { 
+      es: {
         pageTitle: "Boriken Tech | Soluciones de IT en Puerto Rico",
         headerTitle: "Boriken Tech",
         headerSubtitle: "Ayuda Tecnológica Accesible y Soluciones IT para Negocios en Puerto Rico",
-        toggleLanguageButton: "Cambiar a Inglés 🇺🇸",
         aboutMeTitle: "Sobre Mí",
         aboutMeP1: "¡Hola! Soy un profesional de IT con base en Puerto Rico y años de experiencia práctica administrando redes, brindando soporte a estaciones de trabajo, recuperando datos y resolviendo problemas tecnológicos cotidianos tanto para hogares como para empresas.",
         aboutMeP2: "Después de años trabajando para compañías que cobran demasiado y envían a otra persona a hacer el trabajo, decidí convertirme en tu línea directa a la ayuda real, sin intermediarios. Boriken Tech es mi misión unipersonal para ofrecer servicio de nivel experto a individuos y pequeñas empresas sin los costos inflados de los grandes MSP. Obtienes precios transparentes, respuesta rápida y un técnico que realmente conoce tu configuración.",
-        learnMore: "Aprende Más", 
+        learnMore: "Aprende Más",
         service1Title: "Soporte Técnico Personal y para el Hogar",
         service1Desc: "Resolución de problemas de laptop/PC, configuración de Wi-Fi, dispositivos inteligentes, impresoras, instalación de software y más.",
         service1Item1: "Optimización de sistemas y solución a PCs lentas",
@@ -445,8 +465,8 @@
         formSubmitButton: "Enviar Mensaje",
         formErrorMsg: "¡Ups! Algo salió mal al enviar el formulario. Por favor, inténtalo de nuevo o contáctame directamente por WhatsApp o Correo Electrónico.",
         preferMessaging: "¿Prefieres mensajería?",
-        contactWhatsapp: "WhatsApp: 787-340-0573", 
-        contactEmail: "Correo: Jconde26r@gmail.com",   
+        contactWhatsapp: "WhatsApp: 787-340-0573",
+        contactEmail: "Correo: Jconde26r@gmail.com",
         thankYouMsg: "¡Gracias por contactarme! Te responderé en breve.",
         footerCopyright: "&copy; 2025 Boriken Tech. Todos los derechos reservados."
       }
@@ -460,7 +480,7 @@
             service4Price: "<strong>Basic checkups from $60/server</strong>",
             service5Price: "<strong>Starts at $45 for basic backup | Recovery from $75</strong>"
         },
-        es: { 
+        es: {
             service1Price: "<strong>Desde $40/visita</strong>",
             service2Price: "<strong>Planes desde $150/mes</strong>",
             service3Price: "<strong>Consultas desde $65/hora</strong>",
@@ -471,20 +491,39 @@
 
     function applyTranslations() {
       document.documentElement.lang = currentLanguage;
+      const langIcon = document.getElementById('language-icon');
+      const langButton = document.getElementById('languageToggleButton');
+
+      // Update the language toggle button icon and aria-label
+      if (currentLanguage === 'en') {
+        // Page is English, button shows PR flag to offer a switch to Spanish
+        langIcon.src = prFlagIcon;
+        langButton.setAttribute('aria-label', 'Switch to Spanish');
+      } else {
+        // Page is Spanish, button shows US flag to offer a switch to English
+        langIcon.src = usFlagIcon;
+        langButton.setAttribute('aria-label', 'Switch to English');
+      }
+
       document.querySelectorAll('[data-lang-key]').forEach(element => {
         const key = element.getAttribute('data-lang-key');
         
         if (priceElementsMap[currentLanguage] && priceElementsMap[currentLanguage][key]) {
           element.innerHTML = priceElementsMap[currentLanguage][key];
-        } 
+        }
         else if (translations[currentLanguage] && translations[currentLanguage][key]) {
           const placeholderKey = element.getAttribute('data-lang-placeholder-key');
           if (placeholderKey && (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA')) {
             if (translations[currentLanguage][placeholderKey]){
                  element.placeholder = translations[currentLanguage][placeholderKey];
             }
-          } else { 
-            element.textContent = translations[currentLanguage][key];
+          } else {
+            // Handle the title tag separately
+            if(key === 'pageTitle') {
+                document.title = translations[currentLanguage][key];
+            } else {
+                element.textContent = translations[currentLanguage][key];
+            }
           }
         }
       });
@@ -492,7 +531,7 @@
 
     function toggleLanguage() {
       currentLanguage = currentLanguage === 'en' ? 'es' : 'en';
-      localStorage.setItem('preferredLanguage', currentLanguage); 
+      localStorage.setItem('preferredLanguage', currentLanguage);
       applyTranslations();
     }
 
@@ -501,7 +540,7 @@
       if (savedLanguage) {
         currentLanguage = savedLanguage;
       }
-      applyTranslations(); 
+      applyTranslations();
 
       const contactForm = document.getElementById('contactForm');
       const thankYouMessage = document.getElementById('thankYou');
@@ -509,31 +548,25 @@
 
       if (contactForm) {
         contactForm.addEventListener('submit', function(event) {
-          event.preventDefault(); 
+          event.preventDefault();
 
           const formData = new FormData(contactForm);
           const action = contactForm.getAttribute('action');
           const submitButton = contactForm.querySelector('button[type="submit"]');
-          let originalButtonText = ""; // Will be set by applyTranslations or default
-          
-          // Get current translated button text
+          let originalButtonText = "";
+
           const buttonKey = submitButton.getAttribute('data-lang-key');
           if (translations[currentLanguage] && translations[currentLanguage][buttonKey]) {
             originalButtonText = translations[currentLanguage][buttonKey];
           } else {
-            originalButtonText = submitButton.textContent; // Fallback
+            originalButtonText = submitButton.textContent;
           }
           
-          const sendingTextKey = currentLanguage === 'es' ? translations.es.formSubmitButtonSending || 'Enviando...' : translations.en.formSubmitButtonSending || 'Sending...';
-          // You might want to add 'formSubmitButtonSending' to your translations object for "Sending..."
-          // e.g., translations.en.formSubmitButtonSending = "Sending...";
-          //       translations.es.formSubmitButtonSending = "Enviando...";
-
-          submitButton.textContent = sendingTextKey;
+          const sendingText = currentLanguage === 'es' ? 'Enviando...' : 'Sending...';
+          submitButton.textContent = sendingText;
           submitButton.disabled = true;
-          thankYouMessage.style.display = 'none'; // Hide previous messages
+          thankYouMessage.style.display = 'none';
           formErrorMessage.style.display = 'none';
-
 
           fetch(action, {
             method: 'POST',
@@ -545,25 +578,25 @@
             if (response.ok) {
               contactForm.style.display = 'none';
               thankYouMessage.style.display = 'block';
-              formErrorMessage.style.display = 'none'; 
-              contactForm.reset(); 
+              formErrorMessage.style.display = 'none';
+              contactForm.reset();
             } else {
-              response.json().then(data => { 
+              response.json().then(data => {
                 if (Object.hasOwn(data, 'errors')) {
                   console.error(data.errors.map(error => error.message).join(", "));
                 } else {
                   console.error('Form submission failed, but no specific error messages from Formspree.');
                 }
-                formErrorMessage.style.display = 'block'; 
+                formErrorMessage.style.display = 'block';
                 thankYouMessage.style.display = 'none';
-              }).catch(() => { // If response is not JSON or other error
-                formErrorMessage.style.display = 'block'; 
+              }).catch(() => {
+                formErrorMessage.style.display = 'block';
                 thankYouMessage.style.display = 'none';
               });
             }
           }).catch(error => {
             console.error('Error submitting form:', error);
-            formErrorMessage.style.display = 'block'; 
+            formErrorMessage.style.display = 'block';
             thankYouMessage.style.display = 'none';
           }).finally(() => {
             submitButton.textContent = originalButtonText;
